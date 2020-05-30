@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/card1"
+        android:layout_margin="2dp"
+        app:cardCornerRadius="2dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:id="@+id/layout1"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="90dp"
+                android:id="@+id/productimg"
+                android:adjustViewBounds="true"
+                android:src="@drawable/daryproduct"
+                android:layout_centerVertical="true"
+                android:layout_height="70dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/discription"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@+id/productimg"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Product Name"
+                    android:id="@+id/productname"
+                    android:textColor="#000"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/amiko"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="1 Litr"
+                    android:id="@+id/productquantity"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/amiko"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/mrp"
+                    android:text="Rs.89"
+                    android:textColor="#000"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/amiko"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content">
+
+               <TextView
+                   android:layout_width="40dp"
+                   android:id="@+id/minus"
+                   android:text="-"
+                   android:textStyle="bold"
+                   android:textColor="#03A9F4"
+                   android:background="@drawable/border2"
+                   android:textAlignment="center"
+                   android:layout_toLeftOf="@id/count"
+                   android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/count"
+                    android:text="0"
+                    android:textColor="#03A9F4"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="6dp"
+                    android:layout_centerInParent="true"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="40dp"
+                    android:id="@+id/pluss"
+                    android:background="@drawable/border2"
+                    android:text="+"
+                    android:textStyle="bold"
+                    android:textColor="#03A9F4"
+                    android:layout_toRightOf="@id/count"
+                    android:textAlignment="center"
+                    android:layout_height="20dp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/speak"
+        android:layout_marginTop="15dp"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/layout1"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:background="#CACACA"
+            android:id="@+id/view1"
+            android:layout_toLeftOf="@id/textview"
+            android:layout_centerVertical="true"
+            android:layout_height="1dp">
+
+        </View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Delivery Day"
+            android:id="@+id/textview"
+            android:textSize="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="#000"
+            android:fontFamily="@font/amiko"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:background="#CACACA"
+            android:id="@+id/viewr2"
+            android:layout_toRightOf="@id/textview"
+            android:layout_centerVertical="true"
+            android:layout_height="1dp"></View>
+
+</RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:id="@+id/selectdays"
+                android:layout_below="@id/speak"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/dalyklayout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/gradient2"
+                    android:layout_height="35dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Daily"
+                        android:layout_margin="2dp"
+                        android:id="@+id/text11"
+                        android:layout_centerVertical="true"
+                        android:textSize="11dp"
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:fontFamily="@font/amiko"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:id="@+id/dalycheck"
+                        android:visibility="gone"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_check_circle_black_24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="2dp"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/alternatedays"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/gradient2"
+                    android:layout_height="35dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Alternate Days"
+                        android:textSize="11dp"
+                        android:id="@+id/text11"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="2dp"
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:fontFamily="@font/amiko"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:id="@+id/altercheck"
+                        android:visibility="gone"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_check_circle_black_24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="2dp"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/selectdateview"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/gradient2"
+                    android:layout_height="35dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Select Days"
+                        android:textSize="11dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/text11"
+                        android:layout_margin="2dp"
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:fontFamily="@font/amiko"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:visibility="gone"
+                        android:id="@+id/selectcheck"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_check_circle_black_24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="2dp"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/multipledays"
+                android:layout_below="@id/selectdays"
+                android:visibility="gone"
+                android:layout_height="50dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/wekdaysrecyclerview"
+                    android:background="#F8F7F7"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/duration"
+        android:layout_marginTop="15dp"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/multipledays"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:background="#CACACA"
+            android:id="@+id/view1"
+            android:layout_toLeftOf="@id/textview"
+            android:layout_centerVertical="true"
+            android:layout_height="1dp">
+
+        </View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Duration"
+            android:id="@+id/textview"
+            android:textSize="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="#000"
+            android:fontFamily="@font/amiko"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:background="#CACACA"
+            android:id="@+id/viewr2"
+            android:layout_toRightOf="@id/textview"
+            android:layout_centerVertical="true"
+            android:layout_height="1dp"></View>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:id="@+id/duartinlayout"
+        android:layout_below="@id/duration"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/startdate"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/border3"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Start Date"
+                android:layout_margin="2dp"
+                android:id="@+id/text11"
+                android:textSize="12dp"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="08-042020"
+                android:id="@+id/startdatetxt"
+                android:textSize="10dp"
+                android:layout_margin="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/text11"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/enddate"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/border3"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="End Date"
+                android:textSize="12dp"
+                android:id="@+id/text11"
+                android:layout_margin="2dp"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Optional"
+                android:id="@+id/enddatetxt"
+                android:layout_margin="1dp"
+                android:textSize="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/text11"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/crad2"
+        app:cardCornerRadius="2dp"
+        android:layout_margin="2dp"
+        android:layout_below="@id/card1"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/totlaoredrrlayout"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/totalamount"
+                android:text="Total Amount"
+                android:fontFamily="@font/amiko"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/TOTALmrp"
+                    android:fontFamily="@font/amiko"
+                    android:layout_toRightOf="@id/totalamount"
+                    android:text=" Rs.178"
+                    android:textColor="#000"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@drawable/gradient2"
+                android:id="@+id/oredrbtn"
+                android:text="Order Now"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/totlaoredrrlayout"
+                android:textColor="#fff"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_height="35dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_below="@id/oredrbtn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="3dp"
+                android:textSize="10dp"
+                android:fontFamily="@font/amiko"
+                android:text="Your order will be deliverd daily in the morining"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

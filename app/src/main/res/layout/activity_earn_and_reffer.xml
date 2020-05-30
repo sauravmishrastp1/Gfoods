@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:layout_height="match_parent"
+    tools:context=".EarnAndRefferActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/clidlayout"
+        android:background="@drawable/topimg"
+        android:layout_height="170dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/backpresslayout"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/imgback"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/textviewback"
+            android:layout_toRightOf="@id/imgback"
+            android:text="Back"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Refer And Earn"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/amiko"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/referimg"
+        android:layout_below="@+id/clidlayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/refferandearn"
+        android:layout_height="200dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_below="@id/referimg"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="You'll earn Rs.100"
+            android:fontFamily="@font/amiko"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/amiko"
+            android:text="When you refer your friends"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Your Referal Code"
+            android:fontFamily="@font/amiko"
+             android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_gravity="center"
+            android:background="@drawable/dotedrectangel"
+            android:layout_height="wrap_content">
+            <Button
+            android:layout_width="match_parent"
+                android:background="#D6D5D5"
+                android:layout_margin="1dp"
+                android:fontFamily="@font/amiko"
+            android:text="AB1238"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:layout_height="35dp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:background="@drawable/bottomgradent"
+        android:text="Share Now"
+        android:clickable="true"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_height="40dp" />
+
+</RelativeLayout>

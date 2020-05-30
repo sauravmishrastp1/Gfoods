@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EarnAndRefferActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/clidlayout"
+        android:background="@drawable/topimg"
+        android:layout_height="170dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/backpresslayout"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/imgback"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/textviewback"
+                android:layout_toRightOf="@id/imgback"
+                android:text="Add Money"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="SELECT PATMENT OPTION"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/amiko"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+  <TextView
+      android:layout_width="wrap_content"
+      android:id="@+id/amounttxt"
+      android:layout_below="@id/clidlayout"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="50dp"
+      android:text="Amount"
+      android:textSize="17dp"
+      android:textColor="#000"
+      android:fontFamily="@font/amiko"
+      android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/text2"
+        android:layout_below="@id/amounttxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:text="You Wallet will be credit with Rs.200"
+        android:textSize="12dp"
+        android:fontFamily="@font/amiko"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/makepaymnet"
+        android:textColor="#fff"
+        android:fontFamily="@font/amiko"
+        android:layout_below="@id/text2"
+        android:background="@drawable/gradient2"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Make Payment"
+        android:layout_marginTop="30dp"
+        android:layout_height="35dp" />
+
+
+</RelativeLayout>

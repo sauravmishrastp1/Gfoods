@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="3dp"
+    android:layout_margin="3dp"
+    android:layout_height="wrap_content"
+    tools:context=".LoginActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Skip"
+        android:visibility="gone"
+        android:id="@+id/skip"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="14dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/layot11"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="200dp"
+            android:id="@+id/logo"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo"
+            android:adjustViewBounds="true"
+            android:layout_height="70dp" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/inputlayoufirst"
+            android:layout_below="@id/logo"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:drawableStart="@drawable/profile"
+                android:id="@+id/shipingaddress_et"
+                android:hint="User name"
+                android:textSize="15dp"
+                android:fontFamily="@font/amiko"
+                android:textColorHint="#727070"
+                android:visibility="visible"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/inputlayoumobilno"
+            android:layout_below="@id/inputlayoufirst"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:drawableStart="@drawable/phoneuser"
+                android:id="@+id/phoneet"
+                android:hint="Phone"
+                android:textSize="15dp"
+                android:fontFamily="@font/amiko"
+                android:textColorHint="#727070"
+                android:visibility="visible"
+                android:inputType="number"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/inputlayoumailid"
+            android:layout_below="@id/inputlayoumobilno"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:drawableStart="@drawable/location"
+                android:id="@+id/emailet"
+                android:hint="location"
+                android:textSize="15dp"
+                android:fontFamily="@font/amiko"
+                android:textColorHint="#727070"
+                android:visibility="visible"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@id/inputlayoumailid"
+            android:id="@+id/inputlayousecond"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:visibility="gone"
+            app:passwordToggleEnabled="false"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height= "wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/passwordet"
+                android:drawableStart="@drawable/ic_lock_black_24dp"
+                android:hint="Password"
+                android:textSize="15dp"
+                android:fontFamily="@font/amiko"
+                android:textColorHint="#727070"
+                android:visibility="gone"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:text="Update"
+            android:background="@drawable/gradient2"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/sinupup"
+            android:textColor="@color/white"
+            android:layout_below="@id/inputlayousecond"
+            android:layout_height="35dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/sinupup"
+            android:layout_marginTop="7dp"
+            android:visibility="gone"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/register"
+                android:text="Create New Account?"
+                android:textSize="14dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Forget Password?"
+                android:id="@+id/forgetpass"
+                android:layout_marginStart="15dp"
+                android:textColor="#000"
+                android:textSize="14dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/progress_circular"
+            android:visibility="gone"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/layot11"
+        android:layout_height="20dp">
+
+    </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

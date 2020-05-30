@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#F7F7F7"
+    android:layout_height="match_parent"
+    tools:context=".EarnAndRefferActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/clidlayout"
+        android:background="@drawable/topimg"
+        android:layout_height="170dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/backpresslayout"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/imgback"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/textviewback"
+                android:layout_toRightOf="@id/imgback"
+                android:text="Back"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="ADD PLAN"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/amiko"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@id/clidlayout"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/cleanderlayoutt"
+            layout="@layout/addplane1stlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+</RelativeLayout>

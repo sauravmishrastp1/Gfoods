@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#DD9E9E"
+    android:layout_marginTop="4dp"
+    app:cardCornerRadius="1dp"
+    android:elevation="8dp"
+    app:cardBackgroundColor="#FEFFFD"
+    android:layout_margin="5dp"
+    android:layout_marginBottom="4dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="90dp"
+            android:id="@+id/productimg"
+            android:src="@drawable/wallet"
+            android:layout_centerVertical="true"
+            android:layout_height="90dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/discription"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@+id/productimg"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Available Blance"
+                android:id="@+id/availblance"
+                android:textSize="14dp"
+                android:textColor="#A2A0A0"
+                android:textStyle="bold"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/blance"
+                android:text="Rs.89"
+                android:textSize="12dp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

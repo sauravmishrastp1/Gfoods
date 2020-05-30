@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EarnAndRefferActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/clidlayout"
+        android:background="@drawable/topimg"
+        android:layout_height="170dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/backpresslayout"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/imgback"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/textviewback"
+                android:layout_toRightOf="@id/imgback"
+                android:text="Add Money"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="SELECT PATMENT OPTION"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/amiko"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:id="@+id/totalpaid"
+       android:layout_below="@id/clidlayout"
+       android:layout_marginEnd="30dp"
+       android:layout_marginStart="30dp"
+       android:layout_marginTop="20dp"
+       android:background="@drawable/border3"
+       android:layout_height="30dp">
+       <TextView
+           android:layout_width="wrap_content"
+           android:text="Total amount to be paid:"
+           android:textColor="#000"
+           android:fontFamily="@font/amiko"
+           android:layout_centerVertical="true"
+           android:layout_marginStart="10dp"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:layout_width="wrap_content"
+           android:id="@+id/amountttt"
+           android:layout_centerVertical="true"
+           android:layout_alignParentEnd="true"
+           android:textColor="#000"
+           android:fontFamily="@font/amiko"
+           android:layout_marginEnd="10dp"
+          android:text="Rs.200"
+           android:layout_height="wrap_content" />
+
+
+   </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/view"
+        android:layout_below="@id/totalpaid"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/gray"
+        android:layout_height="1dp"></View>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/layout"
+        android:layout_below="@id/view"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/startdate"
+            android:fontFamily="@font/amiko"
+            android:textSize="15dp"
+            android:text="Card Payment"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/linearlayout"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="35dp"
+                android:src="@drawable/nextmonth"
+                android:layout_height="35dp" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:id="@+id/view"
+            android:layout_marginTop="6dp"
+            android:background="#BBBABA"
+            android:layout_below="@id/startdate"
+            android:layout_height="1dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/enddate"
+            android:layout_marginTop="26dp"
+            android:gravity="center"
+            android:layout_below="@+id/startdate"
+            android:text="Net Banking"
+            android:textSize="15dp"
+            android:fontFamily="@font/amiko"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/endlayout"
+            android:layout_marginTop="26dp"
+            android:layout_below="@id/startdate"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:src="@drawable/nextmonth"
+                android:layout_height="35dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:id="@+id/endview"
+            android:layout_marginTop="6dp"
+            android:background="#BBBABA"
+            android:layout_below="@id/enddate"
+            android:layout_height="1dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/line3"
+            android:layout_marginTop="26dp"
+            android:gravity="center"
+            android:layout_below="@+id/enddate"
+            android:text="Wallet"
+            android:textSize="15dp"
+            android:fontFamily="@font/amiko"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/endlayout"
+            android:layout_marginTop="26dp"
+            android:layout_below="@id/enddate"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:src="@drawable/nextmonth"
+                android:layout_height="35dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:id="@+id/endview"
+            android:layout_marginTop="6dp"
+            android:background="#BBBABA"
+            android:layout_below="@id/line3"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/upi"
+        android:layout_below="@+id/layout"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="UPI"
+            android:textSize="18dp"
+            android:fontFamily="@font/amiko"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/down"
+            android:layout_centerVertical="true"
+            android:layout_height="35dp" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/upi"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_height="wrap_content">
+        <TextView
+        android:layout_width="wrap_content"
+        android:text="Virtual Paymnet Address"
+        android:id="@+id/txt1"
+        android:fontFamily="@font/amiko"
+        android:textSize="12dp"
+        android:layout_height="wrap_content" />
+        <EditText
+            android:layout_width="match_parent"
+            android:id="@+id/bpn"
+            android:layout_below="@id/txt1"
+            android:hint="Enter Your VPA"
+            android:textColorHint="#707070"
+            android:textAlignment="center"
+            android:background="@drawable/border3"
+            android:layout_height="35dp">
+        </EditText>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_below="@id/bpn"
+            android:layout_marginTop="20dp"
+            android:textColor="#fff"
+            android:fontFamily="@font/amiko"
+            android:background="@drawable/gradient2"
+            android:text="Pay Securely"
+            android:layout_height="35dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="2dp"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="#FCFBFB"
+        android:layout_height="match_parent">
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/blackborder"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:text="username"
+            android:id="@+id/username"
+            android:textAlignment="textStart"
+             android:fontFamily="@font/amiko"
+            android:layout_margin="5dp"
+            android:drawableStart="@drawable/profile"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/blackborder"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:text="phoneno"
+            android:id="@+id/phoneNo"
+            android:layout_margin="5dp"
+            android:textAlignment="textStart"
+            android:fontFamily="@font/amiko"
+            android:drawableStart="@drawable/phoneuser"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/blackborder"
+        android:layout_marginEnd="30dp"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:text="eamil@gmail.com"
+            android:layout_margin="5dp"
+            android:id="@+id/emailet"
+            android:textAlignment="textStart"
+            android:fontFamily="@font/amiko"
+            android:drawableStart="@drawable/emailuser"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/blackborder"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:text="greater noida"
+            android:textAlignment="textStart"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/amiko"
+            android:id="@+id/locationet"
+            android:drawableStart="@drawable/location"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+<Button
+    android:layout_width="match_parent"
+    android:id="@+id/buttonedit"
+    android:layout_marginStart="30dp"
+    android:layout_marginTop="40dp"
+    android:text="Edit profile"
+    android:textColor="#fff"
+    android:background="@drawable/gradient2"
+    android:layout_marginEnd="30dp"
+    android:layout_marginBottom="20dp"
+    android:layout_height="35dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.9"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFEFE"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/profileRelative"
+                android:layout_width="match_parent"
+                android:background="#fff"
+                android:layout_height="90dp"
+                android:padding="24dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:src="@drawable/logoo"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content" />
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+          <View
+              android:layout_width="match_parent"
+              android:background="#C7C6C6"
+              android:layout_height="1dp"/>
+            <LinearLayout
+                android:id="@+id/LOGIN"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/profile"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Login/Sinup"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/profileviewlayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/profile"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Profile"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/cleanderview"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/cleandrerer"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Cleander"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/addplaneview"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/plane"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="My Plan"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/mywallet"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/wallettt"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="My Wallet"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/viewbill"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/plane"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="View Bill"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/addvactionview"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/vacation"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Vacations"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/offerlayoutview"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_local_offer_black_24dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Offers"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/sharearn"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_share_black_24dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Reffer and Earn"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/helpview"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/help"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Help"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/deliveryboy"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/dvvv" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Delivery Boy"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/logoutview"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/logoutt"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="5"
+                    android:textColor="#000"
+                    android:gravity="center_vertical"
+                    android:text="Logout"
+                    android:fontFamily="@font/amiko"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

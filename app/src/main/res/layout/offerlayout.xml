@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="15dp"
+        android:layout_height="90dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginEnd="30dp"
+            android:orientation="vertical"
+            android:background="@drawable/gradient2"
+            android:layout_height="90dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Special Offer"
+                android:textColor="#fff"
+                android:textSize="18dp"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Get 20% off"
+                android:textColor="#fff"
+                android:textSize="8dp"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="By any Cookie Product"
+                android:textColor="#fff"
+                android:textSize="8dp"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Promo Code 2458"
+                android:textColor="#fff"
+                android:textSize="12dp"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="90dp"
+            android:id="@+id/carddd"
+            android:layout_margin="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#ffff"
+            android:layout_height="90dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/productimg"
+            android:adjustViewBounds="true"
+            android:layout_margin="5dp"
+            android:src="@drawable/daryproduct"
+            android:layout_height="match_parent" />
+
+        </androidx.cardview.widget.CardView>
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/circleoffer"
+        android:layout_height="40dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="20%"
+                android:id="@+id/pp"
+                android:textSize="9dp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:fontFamily="@font/amiko"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="off"
+                android:textSize="9dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:fontFamily="@font/amiko"
+                android:textColor="#fff"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
