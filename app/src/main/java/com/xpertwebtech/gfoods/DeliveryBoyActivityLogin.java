@@ -55,7 +55,7 @@ public class DeliveryBoyActivityLogin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DeliveryBoyActivityLogin.this,MainActivity.class);
                 startActivity(intent);
-                User user=new User("null","null","null","null","null");
+                User user=new User("null","null","null","null","null","null");
                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
             }
@@ -116,7 +116,7 @@ public class DeliveryBoyActivityLogin extends AppCompatActivity {
                                 String userphone = userJson.getString("phone");
                                 String city = userJson.getString("active");
 
-                                User user=new User(userid,username,userphone,useremail,city);
+                                User user=new User(userid,username,userphone,useremail,city,"");
 
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 if(city.equals("1")) {

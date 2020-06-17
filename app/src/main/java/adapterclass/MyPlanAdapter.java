@@ -17,7 +17,6 @@ import com.xpertwebtech.gfoods.R;
 
 import java.util.ArrayList;
 
-import modelclass.CityModel;
 import modelclass.MyPlanModelClass;
 
 public class MyPlanAdapter extends RecyclerView.Adapter<MyPlanAdapter.ViewHolder> {

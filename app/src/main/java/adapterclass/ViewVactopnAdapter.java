@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xpertwebtech.gfoods.AddPlaneActivity;
 import com.xpertwebtech.gfoods.EndVavationActivity;
 import com.xpertwebtech.gfoods.R;
 

@@ -1,8 +1,6 @@
 package com.xpertwebtech.gfoods;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,10 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import adapterclass.MyProductcategory;
-import modelclass.MyPlanProductCat;
-import modelclass.User;
-import utils.SharedPrefManager;
 import utils.VolleySingleton;
 
 public class HelpActivity extends AppCompatActivity {

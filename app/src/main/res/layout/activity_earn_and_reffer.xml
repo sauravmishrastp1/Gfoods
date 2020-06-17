@@ -83,6 +83,7 @@
             android:layout_height="wrap_content">
             <Button
             android:layout_width="match_parent"
+                android:id="@+id/refercode"
                 android:background="#D6D5D5"
                 android:layout_margin="1dp"
                 android:fontFamily="@font/amiko"
@@ -95,6 +96,7 @@
     </LinearLayout>
     <Button
         android:layout_width="match_parent"
+        android:id="@+id/sharenowww"
         android:background="@drawable/bottomgradent"
         android:text="Share Now"
         android:clickable="true"

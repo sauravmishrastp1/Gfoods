@@ -1,7 +1,6 @@
 package adapterclass;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
-import com.xpertwebtech.gfoods.MainActivity;
 import com.xpertwebtech.gfoods.R;
 
 import java.util.ArrayList;
 
-import modelclass.CityModel;
 import modelclass.OfferModel;
 
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.ViewHolder> {

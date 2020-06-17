@@ -2,12 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.xpertwebtech.gfoods">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logoo"
@@ -16,36 +10,45 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CalenderWiseActivity"></activity>
-        <activity android:name=".PravacyPolicyPage" />
-        <activity android:name=".OrderActivity" />
-        <activity android:name=".DeliveryBoySinup" />
-        <activity android:name=".DeliveryBoyActivityLogin" />
-        <activity android:name=".EndVavationActivity" />
-        <activity android:name=".MonthlyWiseBillActivity" />
-        <activity android:name=".AddMoneyLyoutActivity" />
-        <activity android:name=".ViewBillActivity" />
-        <activity android:name=".SelectPayemnt" />
-        <activity android:name=".AddPlaneActivity" />
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".OffersActivity" />
-        <activity android:name=".MyPlanActivity" />
-        <activity android:name=".MyProfileActivty" />
-        <activity android:name=".MyWalletActivity" />
-        <activity android:name=".ViewVacationActivtiy" />
-        <activity android:name=".EarnAndRefferActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ChooseCityActivity" />
-        <activity android:name=".ChooseStateActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SplaashScreen">
+        <activity android:name="com.xpertwebtech.gfoods.OrderHitoryActivity"></activity>
+        <activity android:name="com.xpertwebtech.gfoods.AddPlanActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.DeliverdProductDetails" />
+        <activity android:name="com.xpertwebtech.gfoods.CalenderWiseActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.PravacyPolicyPage" />
+        <activity android:name="com.xpertwebtech.gfoods.OrderActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.DeliveryBoySinup" />
+        <activity android:name="com.xpertwebtech.gfoods.DeliveryBoyActivityLogin" />
+        <activity android:name="com.xpertwebtech.gfoods.EndVavationActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.MonthlyWiseBillActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.AddMoneyLyoutActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.ViewBillActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.SelectPayemnt" />
+        <activity android:name="com.xpertwebtech.gfoods.AddPlaneActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.HelpActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.OffersActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.MyPlanActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.MyProfileActivty" />
+        <activity android:name="com.xpertwebtech.gfoods.MyWalletActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.ViewVacationActivtiy" />
+        <activity android:name="com.xpertwebtech.gfoods.EarnAndRefferActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.RegisterActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.ChooseCityActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.ChooseStateActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.LoginActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.SplaashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.xpertwebtech.gfoods.MainActivity" />
     </application>
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>

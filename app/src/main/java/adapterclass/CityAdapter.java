@@ -11,15 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xpertwebtech.gfoods.ChooseCityActivity;
-import com.xpertwebtech.gfoods.MainActivity;
 import com.xpertwebtech.gfoods.R;
 import com.xpertwebtech.gfoods.RegisterActivity;
 
 import java.util.ArrayList;
 
 import modelclass.CityModel;
-import modelclass.StateName;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.ViewHolder> {
     private ArrayList<CityModel>stateNames;

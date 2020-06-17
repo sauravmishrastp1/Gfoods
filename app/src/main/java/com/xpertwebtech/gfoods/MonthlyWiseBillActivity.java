@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -43,22 +45,35 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
     private ImageView imageView;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private View mynullplaylaypout;
+    private Button addplanybutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_wise_bill);
         final Calendar c = Calendar.getInstance();
         previous = findViewById(R.id.previousmonth);
+        addplanybutton = findViewById(R.id.buttonaddplane);
         toolbar = findViewById(R.id.toolbar);
         next = findViewById(R.id.nextmonth);
+        mynullplaylaypout = findViewById(R.id.nullmyplanelayout);
         progressBar = findViewById(R.id.progressbarr);
         //imageView = findViewById(R.id.referimg);
         recyclerView = findViewById(R.id.recycelerview);
-        toolbar.setTitle("My Plan");
-        vactionmodelss.clear();
+        toolbar.setTitle("My Subscription Plan");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        vactionmodelss.clear();
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MonthlyWiseBillActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        addplanybutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MonthlyWiseBillActivity.this,MainActivity.class);
@@ -69,7 +84,7 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
         //System.out.println("Current time => " + c.getTime());
         Bundle bundle = new Bundle();
         date = bundle.getString("date");
-        Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
 
         final SimpleDateFormat df = new SimpleDateFormat("ddMMMyyyy");
         final String[] formattedDate = {df.format(c.getTime())};
@@ -130,17 +145,19 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
                                     String dailyy = stateJSONObject.getString("plan_type");
                                     String productname = stateJSONObject.getString("product_name");
 
+                                   if(!quant.equals("0")&&!pricee.equals("0")){
+                                       vactionmodelss.add(new ViewBillModel(invoice,dat1,date2,orderstatus,"http://lsne.in/gfood/upload/"+img,pricee,dailyy,productid,quant,productname,id));
+                                       LinearLayoutManager gridLayoutManager1 = new LinearLayoutManager(MonthlyWiseBillActivity.this);
+
+                                       recyclerView.setLayoutManager(gridLayoutManager1);
+                                       ViewBillAdapter gridProductAdapter = new ViewBillAdapter(vactionmodelss, MonthlyWiseBillActivity.this);
+                                       recyclerView.setAdapter(gridProductAdapter);
+                                       gridProductAdapter.notifyDataSetChanged();
+                                       progressBar.setVisibility(View.GONE);
+                                   }
 
 
-                                    vactionmodelss.add(new ViewBillModel(invoice,dat1,date2,orderstatus,"http://lsne.in/gfood/upload/"+img,pricee,dailyy,productid,quant,productname,id));
 
-                                    LinearLayoutManager gridLayoutManager1 = new LinearLayoutManager(MonthlyWiseBillActivity.this);
-
-                                    recyclerView.setLayoutManager(gridLayoutManager1);
-                                    ViewBillAdapter gridProductAdapter = new ViewBillAdapter(vactionmodelss, MonthlyWiseBillActivity.this);
-                                    recyclerView.setAdapter(gridProductAdapter);
-                                    gridProductAdapter.notifyDataSetChanged();
-                                    progressBar.setVisibility(View.GONE);
 
 
                                 }
@@ -148,6 +165,8 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.GONE);
+                                mynullplaylaypout.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -155,7 +174,7 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
                            // imageView.setVisibility(View.VISIBLE);
                             //text.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
-
+                            mynullplaylaypout.setVisibility(View.VISIBLE);
 
                             progressBar.setVisibility(View.GONE);
 
@@ -168,6 +187,8 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(MonthlyWiseBillActivity.this, "Server Not Responding"+ error.getMessage(), Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
+                        mynullplaylaypout.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
 
                     }
                 }) {

@@ -6,6 +6,8 @@ public class MyPlanProductCat {
     private String quanty;
     private String mrp;
     private int color;
+    private String id;
+    private String date;
 
     public String getProductimg() {
         return productimg;
@@ -55,16 +57,21 @@ public class MyPlanProductCat {
         this.id = id;
     }
 
-    public MyPlanProductCat(String productimg, String producvtname, String quanty, String mrp, int color, String id) {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public MyPlanProductCat(String productimg, String producvtname, String quanty, String mrp, int color, String id, String date) {
         this.productimg = productimg;
         this.producvtname = producvtname;
         this.quanty = quanty;
         this.mrp = mrp;
         this.color = color;
         this.id = id;
+        this.date = date;
     }
-
-    private String id;
-
-
 }

@@ -22,10 +22,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import adapterclass.MyPlanAdapter;
 import adapterclass.OfferAdapter;
 import modelclass.OfferModel;
-import utils.SharedPrefManager;
 import utils.VolleySingleton;
 
 public class OffersActivity extends AppCompatActivity {
@@ -70,9 +68,9 @@ public class OffersActivity extends AppCompatActivity {
                                 for(int i=0;i<profiledata.length();i++) {
                                     JSONObject profiledataJSONObject = profiledata.getJSONObject(i);
                                     String productimg = profiledataJSONObject.getString("image");
-                                    String offer = profiledataJSONObject.getString("discount_prcnt");
+                                    String offer = profiledataJSONObject.getString("off_percent");
                                     String productname = profiledataJSONObject.getString("product_name");
-                                    String offerdiscount = profiledataJSONObject.getString("offer_price");
+                                    String offerdiscount = profiledataJSONObject.getString("promo_code");
 
                                     offerModels.add(new OfferModel("http://lsne.in/gfood/upload/"+productimg,offer,productname));
 

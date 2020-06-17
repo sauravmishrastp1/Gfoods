@@ -5,20 +5,17 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xpertwebtech.gfoods.ChooseCityActivity;
 import com.xpertwebtech.gfoods.MyWalletActivity;
 import com.xpertwebtech.gfoods.R;
 
 import java.util.ArrayList;
 
 import modelclass.MyWalletModel;
-import modelclass.StateName;
 
 public class MyWalletLayout extends RecyclerView.Adapter<MyWalletLayout.ViewHolder> {
     private ArrayList<MyWalletModel>stateNames;

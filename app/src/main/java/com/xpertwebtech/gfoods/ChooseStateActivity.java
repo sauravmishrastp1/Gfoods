@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -20,12 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import adapterclass.StateAdapter;
 import modelclass.StateName;
-import modelclass.User;
-import utils.SharedPrefManager;
 import utils.VolleySingleton;
 
 public class ChooseStateActivity extends AppCompatActivity {

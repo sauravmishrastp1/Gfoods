@@ -7,18 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.ComponentCallbacks2;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.icu.util.GregorianCalendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,7 +25,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.applandeo.materialcalendarview.EventDay;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -46,12 +40,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+import java.util.Random;
 
 import adapterclass.MyAdapter;
 import adapterclass.MyPlanAdapter;
@@ -97,8 +90,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean shouldShow = false;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private ImageView previousmonth, nextmonth;
+    private SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     private int day[];
     private boolean cxx;
+    private String plantypee;
+    private Bundle bundle;
+    public static  String date1="null";
+    public static String money;
 
 
     @SuppressLint({"NewApi", "ResourceAsColor"})
@@ -128,12 +126,12 @@ public class MainActivity extends AppCompatActivity {
 //        bookingsListView.setAdapter(adapter);
 
 
-        compactCalendarView.setUseThreeLetterAbbreviation(false);
-        compactCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
-        compactCalendarView.displayOtherMonthDays(false);
-        //compactCalendarView.setIsRtl(true);
+//        compactCalendarView.setUseThreeLetterAbbreviation(false);
+//        compactCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
+//        compactCalendarView.displayOtherMonthDays(false);
+//        //compactCalendarView.setIsRtl(true);
 
-        compactCalendarView.invalidate();
+       compactCalendarView.invalidate();
 
         logEventsByMonth(compactCalendarView);
 
@@ -161,43 +159,57 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
         }
+        showwallet();
 //       String userid = SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
 //        Toast.makeText(this, "userid=>"+userid, Toast.LENGTH_SHORT).show();
 
-        loadevent();
-        loaddelevedevent();
-        vacationevent();
-        previousmonth.setVisibility(View.VISIBLE);
-        nextmonth.setVisibility(View.VISIBLE);
-        heading.setText(dateFormatForMonth.format(compactCalendarView.getFirstDayOfCurrentMonth()));
-        logEventsByMonth(compactCalendarView);
 
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
 
-                heading.setText(dateFormatForMonth.format(dateClicked));
+
                 //Toast.makeText(MainActivity.this, "=>"+dateFormatForMonth, Toast.LENGTH_SHORT).show();
                List<Event> bookingsFromMap = compactCalendarView.getEvents(dateClicked);
-                   for(int i =0;i<bookingsFromMap.size();i++){
+               if(bookingsFromMap.size()!=0) {
+                   for (int i = 0; i < bookingsFromMap.size(); i++) {
                        Object objects = bookingsFromMap.get(i);
                        int data = (int) ((Event) objects).getColor();
-                       String date =dateFormat.format(dateClicked);
-                      // Toast.makeText(MainActivity.this, ""+date, Toast.LENGTH_SHORT).show();
-                       if(data==Color.parseColor("#4fC3F7")){
-                        Intent intent = new Intent(MainActivity.this,CalenderWiseActivity.class);
-                        intent.putExtra("date",date);
-                        startActivity(intent);
-                       }if(data==Color.parseColor("#AEEA00")){
-                           Intent intent = new Intent(MainActivity.this,ViewBillActivity.class);
-                           intent.putExtra("date",date);
+                       String date = dateFormat.format(dateClicked);
+                       // Toast.makeText(MainActivity.this, ""+date, Toast.LENGTH_SHORT).show();
+                       if (data == Color.parseColor("#4fC3F7")) {
+                           Intent intent = new Intent(MainActivity.this, CalenderWiseActivity.class);
+                           intent.putExtra("date", date);
                            startActivity(intent);
-                       }if(data==Color.parseColor("#F57F17")){
-                           Intent intent = new Intent(MainActivity.this,ViewVacationActivtiy.class);
+                       }
+                       if (data == Color.parseColor("#AEEA00")) {
+                           Intent intent = new Intent(MainActivity.this, DeliverdProductDetails.class);
+                           intent.putExtra("date", date);
+                           startActivity(intent);
+                       } else if (data == Color.parseColor("#F57F17")) {
+                           Intent intent = new Intent(MainActivity.this, ViewVacationActivtiy.class);
                            startActivity(intent);
                        }
                    }
-                heading.setText(dateFormatForMonth.format(dateClicked));
+               }else {
+                   date1 =dateFormat1.format(dateClicked);
+                   heading.setText("Looking For?");
+                   previousmonth.setVisibility(View.GONE);
+                   nextmonth.setVisibility(View.GONE);
+                   myplaneview.setBackgroundResource(R.drawable.bakgroud);
+                   mycleanderview.setBackgroundResource(R.drawable.border1);
+                   myplanetextview.setTextColor(R.color.colorPrimaryDark);
+                   mycleandertextview.setTextColor(Color.WHITE);
+                   cleanderview.setVisibility(View.GONE);
+                   recyclerView.setVisibility(View.VISIBLE);
+                   productcategory.setVisibility(View.GONE);
+                   myPlanProductCats.clear();
+                   myPlanModelClasses.clear();
+                   previousmonth.setVisibility(View.GONE);
+                   nextmonth.setVisibility(View.GONE);
+                   getmyprlanproduct();
+               }
+
 
             }
 
@@ -207,9 +219,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+       // Toast.makeText(this, "userid=>"+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId(), Toast.LENGTH_SHORT).show();
 
 
-        walletamount.setText("\u20B9" + "50");
         mycleandertextview = findViewById(R.id.mycleandertext);
         myplanetextview = findViewById(R.id.myplanetext);
         mycleanderview = findViewById(R.id.mycleander);
@@ -219,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
+                date1 ="null";
                 loadevent();
                 loaddelevedevent();
                 vacationevent();
@@ -244,29 +257,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        myplaneview.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View v) {
-                heading.setText("Looking For?");
-                previousmonth.setVisibility(View.GONE);
-                nextmonth.setVisibility(View.GONE);
-                myplaneview.setBackgroundResource(R.drawable.bakgroud);
-                mycleanderview.setBackgroundResource(R.drawable.border1);
-                myplanetextview.setTextColor(R.color.colorPrimaryDark);
-                mycleandertextview.setTextColor(Color.WHITE);
-                cleanderview.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
-                productcategory.setVisibility(View.GONE);
-                myPlanProductCats.clear();
-                myPlanModelClasses.clear();
-                previousmonth.setVisibility(View.GONE);
-                nextmonth.setVisibility(View.GONE);
-                getmyprlanproduct();
+
+            myplaneview.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("ResourceAsColor")
+                @Override
+                public void onClick(View v) {
+                    heading.setText("Looking For?");
+                    previousmonth.setVisibility(View.GONE);
+                    nextmonth.setVisibility(View.GONE);
+                    myplaneview.setBackgroundResource(R.drawable.bakgroud);
+                    mycleanderview.setBackgroundResource(R.drawable.border1);
+                    myplanetextview.setTextColor(R.color.colorPrimaryDark);
+                    mycleandertextview.setTextColor(Color.WHITE);
+                    cleanderview.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    productcategory.setVisibility(View.GONE);
+                    myPlanProductCats.clear();
+                    myPlanModelClasses.clear();
+                    previousmonth.setVisibility(View.GONE);
+                    nextmonth.setVisibility(View.GONE);
+                    getmyprlanproduct();
 
 
-            }
-        });
+                }
+            });
+
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
@@ -283,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
+      bundle = getIntent().getExtras();
 
         if (bundle != null) {
             String catname = bundle.getString("productname");
@@ -308,13 +323,22 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } else {
-            loadevent();
-            loaddelevedevent();
-            vacationevent();
-            previousmonth.setVisibility(View.VISIBLE);
-            nextmonth.setVisibility(View.VISIBLE);
-            heading.setText(dateFormatForMonth.format(compactCalendarView.getFirstDayOfCurrentMonth()));
-            logEventsByMonth(compactCalendarView);
+            heading.setText("Looking For?");
+            previousmonth.setVisibility(View.GONE);
+            nextmonth.setVisibility(View.GONE);
+            myplaneview.setBackgroundResource(R.drawable.bakgroud);
+            mycleanderview.setBackgroundResource(R.drawable.border1);
+            myplanetextview.setTextColor(R.color.colorPrimaryDark);
+            mycleandertextview.setTextColor(Color.WHITE);
+            cleanderview.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            productcategory.setVisibility(View.GONE);
+            myPlanProductCats.clear();
+            myPlanModelClasses.clear();
+            previousmonth.setVisibility(View.GONE);
+            nextmonth.setVisibility(View.GONE);
+            getmyprlanproduct();
+
         }
         setSideBar();
 
@@ -331,7 +355,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
 
 
     private void getmyprlanproduct() {
@@ -359,7 +386,7 @@ public class MainActivity extends AppCompatActivity {
                                     String id = categoryJSONObject.getString("id");
 
 
-                                    myPlanModelClasses.add(new MyPlanModelClass(R.drawable.daryproduct, Name, R.color.dary, id));
+                                    myPlanModelClasses.add(new MyPlanModelClass(R.drawable.daryproduct, Name, R.color.dary, id,date1));
 
 
                                 }
@@ -402,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
     private void getcategory() {
         myPlanProductCats.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://lsne.in/gfood/api/product?category_id=" + catId;
+        String url = "http://lsne.in/gfood/api/product?category_id="+catId;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -422,7 +449,7 @@ public class MainActivity extends AppCompatActivity {
                                     String price = categoryJSONObject.getString("price");
                                     String id = categoryJSONObject.getString("id");
 
-                                    myPlanProductCats.add(new MyPlanProductCat("http://lsne.in/gfood/upload/" + productimg, pruductnbame, quant, price, color, id));
+                                    myPlanProductCats.add(new MyPlanProductCat("http://lsne.in/gfood/upload/" + productimg, pruductnbame, quant, price, color, id,date1));
 
                                     LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                                     productcategory.setLayoutManager(layoutManager);
@@ -502,7 +529,8 @@ public class MainActivity extends AppCompatActivity {
     private void loadevent() {
        //  Toast.makeText(this, "enter", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://lsne.in/gfood/api/upcoming-product-for-dileverd?user_id=" + SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+
+        String url = "http://lsne.in/gfood/api/upcoming-product-for-dileverd?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -517,6 +545,8 @@ public class MainActivity extends AppCompatActivity {
                                 for (int i = 0; i < upcoming.length(); i++) {
                                     JSONObject categoryJSONObject = upcoming.getJSONObject(i);
                                     String date = categoryJSONObject.getString("date");
+                                    String markdevelerd = categoryJSONObject.getString("mark_dileverd");
+                                   //  Toast.makeText(MainActivity.this, "date=>"+date, Toast.LENGTH_SHORT).show();
                                     String input_date = date;
                                     SimpleDateFormat format1 = new SimpleDateFormat("yyyy-mm-dd");
                                     Date dt1 = null;
@@ -533,9 +563,13 @@ public class MainActivity extends AppCompatActivity {
                                     int year = Integer.parseInt(format.format(dt1));
                                     int day = Integer.parseInt(format3.format(dt1));
                                     //int a [] ={day};
+                                   // Toast.makeText(MainActivity.this, "month=>"+month+"year=>"+year+"day=>"+day, Toast.LENGTH_SHORT).show();
 
-
-                                    addEvents(month - 1, year, day - 1);
+                                   if(markdevelerd.equals("0")) {
+                                       addEvents(month - 1, year, day - 1);
+                                   }else {
+                                       Toast.makeText(MainActivity.this, "no upcoming", Toast.LENGTH_SHORT).show();
+                                   }
 
                                    // Toast.makeText(MainActivity.this, "day" + day + "month=>" + month + "yer=>" + year, Toast.LENGTH_SHORT).show();
 
@@ -550,7 +584,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "somrthing went wrong" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, "" , Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -572,7 +606,8 @@ public class MainActivity extends AppCompatActivity {
     private void loaddelevedevent() {
        // Toast.makeText(this, "enter", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://lsne.in/gfood/api/dileverd-product?user_id=" + SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+
+        String url = "http://lsne.in/gfood/api/dileverd-product?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -587,6 +622,7 @@ public class MainActivity extends AppCompatActivity {
                                 for (int i = 0; i < upcoming.length(); i++) {
                                     JSONObject categoryJSONObject = upcoming.getJSONObject(i);
                                     String date = categoryJSONObject.getString("date");
+                                    String markdevelerd = categoryJSONObject.getString("mark_dileverd");
                                     String input_date = date;
                                     SimpleDateFormat format1 = new SimpleDateFormat("yyyy-mm-dd");
                                     Date dt1 = null;
@@ -604,8 +640,9 @@ public class MainActivity extends AppCompatActivity {
                                     int day = Integer.parseInt(format3.format(dt1));
                                     //int a [] ={day};
 
-
-                                    adddeleverd(month - 1, year, day - 1);
+                                    if(markdevelerd.equals("1")) {
+                                        adddeleverd(month - 1, year, day - 1);
+                                    }
 
                                    // Toast.makeText(MainActivity.this, "day" + day + "month=>" + month + "yer=>" + year, Toast.LENGTH_SHORT).show();
 
@@ -620,7 +657,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "somrthing went wrong" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -639,7 +676,7 @@ public class MainActivity extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
     }
-    private void vacationevent() {
+    private void vacationevent(){
         // Toast.makeText(this, "enter", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
         String url = "http://lsne.in/gfood/api/vacation-data?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
@@ -674,7 +711,6 @@ public class MainActivity extends AppCompatActivity {
                                     int day = Integer.parseInt(format3.format(dt1));
                                     //int a [] ={day};
 
-
                                     advacation(month - 1, year, day - 1);
 
                                     // Toast.makeText(MainActivity.this, "day" + day + "month=>" + month + "yer=>" + year, Toast.LENGTH_SHORT).show();
@@ -690,7 +726,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "somrthing went wrong" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, "" , Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -795,4 +831,53 @@ public class MainActivity extends AppCompatActivity {
         return Arrays.asList(new Event(Color.parseColor("#F57F17"), timeInMillis, "vacation" + new Date(timeInMillis)));
 
     }
+    private  void showwallet(){
+        String url ="http://lsne.in/gfood/api/view-wallet?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            String status = obj.getString("status");
+                            JSONArray wallet = obj.getJSONArray("$data");
+                            if (status.equals("200")) {
+                                for(int i =0;i<wallet.length();i++){
+                                    JSONObject jsonObject = wallet.getJSONObject(i);
+                                    String id = jsonObject.getString("id");
+                                  money = jsonObject.getString("money");
+                                    walletamount.setText("\u20B9"+money);
+                                    //Toast.makeText(MainActivity.this, "money="+money, Toast.LENGTH_SHORT).show();
+
+                                }
+
+                            } else {
+
+                                Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
+                                // progressBar.setVisibility(View.GONE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this, "somrthing went wrong"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            // progressBar.setVisibility(View.GONE);
+                        }
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "Server Not Responding"+error, Toast.LENGTH_SHORT).show();
+                        // progressBar.setVisibility(View.GONE);
+                    }
+                }) {
+
+        };
+        VolleySingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().clear();
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
 }
+

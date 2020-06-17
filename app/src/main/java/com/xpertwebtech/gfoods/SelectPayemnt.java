@@ -21,7 +21,7 @@ public class SelectPayemnt extends AppCompatActivity {
         backpress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectPayemnt.this,MainActivity.class);
+                Intent intent = new Intent(SelectPayemnt.this,AddMoneyLyoutActivity.class);
                 startActivity(intent);
             }
         });

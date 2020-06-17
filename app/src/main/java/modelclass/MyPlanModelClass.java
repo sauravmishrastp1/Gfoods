@@ -5,6 +5,7 @@ public class MyPlanModelClass {
     private String productname;
     private int color;
     private String id;
+    private String date;
 
     public int getImg() {
         return img;
@@ -38,10 +39,19 @@ public class MyPlanModelClass {
         this.id = id;
     }
 
-    public MyPlanModelClass(int img, String productname, int color, String id) {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public MyPlanModelClass(int img, String productname, int color, String id, String date) {
         this.img = img;
         this.productname = productname;
         this.color = color;
         this.id = id;
+        this.date = date;
     }
 }

@@ -1,12 +1,12 @@
 package com.xpertwebtech.gfoods;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,12 +27,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import adapterclass.StateAdapter;
 import adapterclass.ViewVactopnAdapter;
-import modelclass.StateName;
 import modelclass.Vactionmodel;
 import utils.SharedPrefManager;
 import utils.VolleySingleton;
@@ -49,6 +49,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
     private View layout1,laou2;
     private ProgressBar progressBar;
     private ArrayList<Vactionmodel>vactionmodels = new ArrayList<>();
+    private View nullvacationlayout;
 
 
     @Override
@@ -57,7 +58,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
         setContentView(R.layout.activity_view_vacation_activtiy);
         backpress = findViewById(R.id.backpresslayout);
         progressBar = findViewById(R.id.progress_circular);
-
+        nullvacationlayout = findViewById(R.id.nullvavationlayout);
         addvaction = findViewById(R.id.addvacationNNN);
         layout1 = findViewById(R.id.vacationlayout);
         addvactionre = findViewById(R.id.addvactionrecyclerview);
@@ -65,7 +66,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
         endlayout = findViewById(R.id.endlayout);
         startlayout = findViewById(R.id.linearlayout);
         textView = findViewById(R.id.textview);
-        start = findViewById(R.id.startdate);
+        start = findViewById(R.id.startdatee);
         recyclerView = findViewById(R.id.viewvacationrecyclerview);
         endp = findViewById(R.id.enddatee);
        vactionmodels.clear();
@@ -73,27 +74,29 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
         startlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                                final Calendar c = Calendar.getInstance();
+                                mYear = c.get(Calendar.YEAR);
+                                mMonth = c.get(Calendar.MONTH);
+                                mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(ViewVacationActivtiy.this,
-                        new DatePickerDialog.OnDateSetListener() {
+                                DatePickerDialog datePickerDialog = new DatePickerDialog(ViewVacationActivtiy.this,
+                                        new DatePickerDialog.OnDateSetListener() {
 
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                                            @Override
+                                            public void onDateSet(DatePicker view, int year,
+                                                                  int monthOfYear, int dayOfMonth) {
 
 
-                                date = dayOfMonth + "-" + (monthOfYear+1) + "-" + year;
-                               start.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                                date = dayOfMonth + "-" + (monthOfYear+1) + "-" + year;
+                                                start.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-                                // Toast.makeText(PaymentDeatilsFormActivity.this, "date="+date, LENGTH_SHORT).show();
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
+                                                // Toast.makeText(PaymentDeatilsFormActivity.this, "date="+date, LENGTH_SHORT).show();
+                                            }
+                                        }, mYear, mMonth, mDay);
+                                datePickerDialog.show();
+
 
 
 
@@ -105,6 +108,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
                 layout1.setVisibility(View.VISIBLE);
                 addvactionre.setVisibility(View.GONE);
                 laou2.setVisibility(View.GONE);
+                nullvacationlayout.setVisibility(View.GONE);
             }
         });
 
@@ -117,33 +121,79 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
                 layout1.setVisibility(View.GONE);
                 addvactionre.setVisibility(View.VISIBLE);
                 laou2.setVisibility(View.VISIBLE);
+                nullvacationlayout.setVisibility(View.GONE);
             }
         });
 
         endlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(ViewVacationActivtiy.this);
+                builder1.setMessage("Choose Date?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                final Calendar c = Calendar.getInstance();
+                                mYear = c.get(Calendar.YEAR);
+                                mMonth = c.get(Calendar.MONTH);
+                                mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(ViewVacationActivtiy.this,
-                        new DatePickerDialog.OnDateSetListener() {
+                                DatePickerDialog datePickerDialog = new DatePickerDialog(ViewVacationActivtiy.this,
+                                        new DatePickerDialog.OnDateSetListener() {
 
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                                            @Override
+                                            public void onDateSet(DatePicker view, int year,
+                                                                  int monthOfYear, int dayOfMonth) {
+                                                String enddate = dayOfMonth + "-" + (monthOfYear+1) + "-" + year;
+                                                SimpleDateFormat dfDate  = new SimpleDateFormat("yyyy-MM-dd");
+                                                try {
+                                                    if(dfDate.parse(date).before(dfDate.parse(enddate)))
+                                                    {
+                                                        time = enddate;
+                                                        endp.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                                                    }
+                                                    else if(dfDate.parse(date).equals(dfDate.parse(enddate)))
+                                                    {
+                                                        Toast.makeText(ViewVacationActivtiy.this, "start date and end date must not be equal", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    else
+                                                    {
+                                                        Toast.makeText(ViewVacationActivtiy.this, "end date is not small than start date", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
 
 
-                                time = dayOfMonth + "-" + (monthOfYear+1) + "-" + year;
-                                endp.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                                //time = dayOfMonth + "-" + (monthOfYear+1) + "-" + year;
 
-                                // Toast.makeText(PaymentDeatilsFormActivity.this, "date="+date, LENGTH_SHORT).show();
+                                                // Toast.makeText(PaymentDeatilsFormActivity.this, "date="+date, LENGTH_SHORT).show();
+                                            }
+                                        }, mYear, mMonth, mDay);
+                                datePickerDialog.show();
+
+
                             }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                time="null";
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+
 
 
 
@@ -167,7 +217,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
        laou2.setVisibility(View.VISIBLE);
        progressBar.setVisibility(View.VISIBLE);
         String url ="http://lsne.in/gfood/api/vacation?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+
-        "&start_date="+time+"&end_date="+date;
+        "&start_date="+date+"&end_date="+time;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -260,12 +310,14 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                                 layout1.setVisibility(View.GONE);
+                                nullvacationlayout.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(ViewVacationActivtiy.this, "somrthing went wrong"+e.getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                             layout1.setVisibility(View.GONE);
+                            nullvacationlayout.setVisibility(View.VISIBLE);
                             laou2.setVisibility(View.VISIBLE);
                         }
                     }
@@ -278,6 +330,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         layout1.setVisibility(View.GONE);
                         laou2.setVisibility(View.VISIBLE);
+                        nullvacationlayout.setVisibility(View.VISIBLE);
                     }
                 }) {
 

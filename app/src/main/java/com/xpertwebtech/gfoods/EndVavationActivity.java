@@ -1,10 +1,11 @@
 package com.xpertwebtech.gfoods;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,10 +25,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import adapterclass.ViewVactopnAdapter;
-import modelclass.Vactionmodel;
 import utils.SharedPrefManager;
 import utils.VolleySingleton;
 
@@ -184,27 +185,68 @@ public class EndVavationActivity extends AppCompatActivity {
         endlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(EndVavationActivity.this);
+                builder1.setMessage("Choose Date?");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                final Calendar c = Calendar.getInstance();
+                                mYear = c.get(Calendar.YEAR);
+                                mMonth = c.get(Calendar.MONTH);
+                                mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(EndVavationActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
+                                DatePickerDialog datePickerDialog = new DatePickerDialog(EndVavationActivity.this,
+                                        new DatePickerDialog.OnDateSetListener() {
 
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                                            @Override
+                                            public void onDateSet(DatePicker view, int year,
+                                                                  int monthOfYear, int dayOfMonth) {
+                                                String enddatee = dayOfMonth + "-" + (monthOfYear+1) + "-" + year;
+                                                SimpleDateFormat dfDate  = new SimpleDateFormat("yyyy-MM-dd");
+                                                try {
+                                                    if(dfDate.parse(stardate).before(dfDate.parse(enddatee)))
+                                                    {
+                                                        endtime = enddatee;
+                                                        enddate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                                                    }
+                                                    else if(dfDate.parse(stardate).equals(dfDate.parse(enddatee)))
+                                                    {
+                                                        Toast.makeText(EndVavationActivity.this, "start date and end date must not be equal", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    else
+                                                    {
+                                                        Toast.makeText(EndVavationActivity.this, "end date is not small than start date", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
 
 
-                                endtime = dayOfMonth + "-" +(monthOfYear+1) + "-" + year;
-                                enddate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                                // Toast.makeText(PaymentDeatilsFormActivity.this, "date="+date, LENGTH_SHORT).show();
+                                            }
+                                        }, mYear, mMonth, mDay);
+                                datePickerDialog.show();
 
-                                // Toast.makeText(PaymentDeatilsFormActivity.this, "date="+date, LENGTH_SHORT).show();
+
                             }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                endtime="null";
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
 
 
 

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,9 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import adapterclass.UpcomingAdapter;
-import adapterclass.ViewBillAdapter;
 import modelclass.UpcomingModel;
-import modelclass.ViewBillModel;
 import utils.SharedPrefManager;
 import utils.VolleySingleton;
 
@@ -61,8 +60,9 @@ public class CalenderWiseActivity extends AppCompatActivity {
         toolbar.setTitle("Up Coming");
         vactionmodelss.clear();
         setSupportActionBar(toolbar);
-        userid = SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        userid = SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,6 @@ public class CalenderWiseActivity extends AppCompatActivity {
         bundle = getIntent().getExtras();
         date = bundle.getString("date");
         Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
-
         final SimpleDateFormat df = new SimpleDateFormat("ddMMMyyyy");
         final String[] formattedDate = {df.format(c.getTime())};
         final SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -84,24 +83,25 @@ public class CalenderWiseActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualDate.add(Calendar.MONTH,1);
+                actualDate.add(Calendar.DATE,1);
                 date=sdf.format(actualDate.getTime());
+                getvactiondata();
                 c.add(Calendar.DATE, 1);
                 formattedDate[0] = df.format(c.getTime());
                 datetxt.setText(formattedDate[0]);
 
-                getvactiondata();
             }
         });
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualDate.add(Calendar.MONTH,-1);
+                actualDate.add(Calendar.DATE,-1);
                 date=sdf.format(actualDate.getTime());
+                getvactiondata();
                 c.add(Calendar.DATE, -1);
                 formattedDate[0] = df.format(c.getTime());
                 datetxt.setText(formattedDate[0]);
-                getvactiondata();
+
             }
         });
         vactionmodelss.clear();
@@ -109,10 +109,10 @@ public class CalenderWiseActivity extends AppCompatActivity {
     }
 
     private void getvactiondata(){
-        //Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
         vactionmodelss.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/deliverd-product-by-date?user_id="+"8"+"&date="+"2020-06-06";
+        String url ="http://lsne.in/gfood/api/upcoming-delivery-by-date?user_id="+userid+"&date="+date;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -129,29 +129,26 @@ public class CalenderWiseActivity extends AppCompatActivity {
                                 for(int j=0;j<state.length();j++) {
 
                                     JSONObject stateJSONObject = state.getJSONObject(j);
-                                   // String dat1 = stateJSONObject.getString("start_date");
-                                   // String productid = stateJSONObject.getString("product_id");
-                                   // String id = stateJSONObject.getString("id");
-                                   // String date2 = stateJSONObject.getString("end_date");
-                                   // String orderstatus = stateJSONObject.getString("order_status");
                                     String img = stateJSONObject.getString("image");
                                     String quant = stateJSONObject.getString("qunatity");
-                                   // String pricee = stateJSONObject.getString("" + "price");
-                                   // String invoice = stateJSONObject.getString("invoice_no");
-                                   // String dailyy = stateJSONObject.getString("plan_type");
                                     String productname = stateJSONObject.getString("product_name");
+                                   String deliverystatus = stateJSONObject.getString("mark_dileverd");
+                                   if(deliverystatus.equals("0")){
+                                       vactionmodelss.add(new UpcomingModel("http://lsne.in/gfood/upload/"+img,productname,quant));
+
+                                       LinearLayoutManager gridLayoutManager1 = new LinearLayoutManager(CalenderWiseActivity.this);
+
+                                       recyclerView.setLayoutManager(gridLayoutManager1);
+                                       UpcomingAdapter gridProductAdapter = new UpcomingAdapter(vactionmodelss, CalenderWiseActivity.this);
+                                       recyclerView.setAdapter(gridProductAdapter);
+                                       gridProductAdapter.notifyDataSetChanged();
+                                       progressBar.setVisibility(View.GONE);
+                                   }else {
+                                       Toast.makeText(CalenderWiseActivity.this, "No Upcoming Order", Toast.LENGTH_SHORT).show();
+                                   }
 
 
 
-                                    vactionmodelss.add(new UpcomingModel("http://lsne.in/gfood/upload/"+img,productname,quant));
-
-                                    LinearLayoutManager gridLayoutManager1 = new LinearLayoutManager(CalenderWiseActivity.this);
-
-                                    recyclerView.setLayoutManager(gridLayoutManager1);
-                                    UpcomingAdapter gridProductAdapter = new UpcomingAdapter(vactionmodelss, CalenderWiseActivity.this);
-                                    recyclerView.setAdapter(gridProductAdapter);
-                                    gridProductAdapter.notifyDataSetChanged();
-                                    progressBar.setVisibility(View.GONE);
 
 
                                 }
@@ -187,5 +184,12 @@ public class CalenderWiseActivity extends AppCompatActivity {
         VolleySingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().clear();
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CalenderWiseActivity.this,MainActivity.class);
+        startActivity(intent);
     }
 }

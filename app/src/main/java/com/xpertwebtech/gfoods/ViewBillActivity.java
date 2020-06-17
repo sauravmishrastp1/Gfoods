@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -23,18 +22,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import adapterclass.MonthlyBillAdapter;
-import adapterclass.ViewBillAdapter;
-import adapterclass.ViewVactopnAdapter;
 import modelclass.MonthlyBillModelclass;
-import modelclass.Vactionmodel;
-import modelclass.ViewBillModel;
 import utils.SharedPrefManager;
 import utils.VolleySingleton;
 

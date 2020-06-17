@@ -26,9 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,7 +37,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import utils.FileUtils;
-import utils.SharedPrefManager;
 import utils.VolleyMultipartRequest;
 import utils.VolleySingleton;
 
@@ -51,13 +48,12 @@ public class DeliveryBoySinup extends AppCompatActivity {
     private Button sinup;
     private View uploadImage;
     private static final int GALLERY_IMAGE = 1;
-    private String filePathpic = "";
-    private String extension;
-    private String type="";
+    private String filePathpic = "null";
+    private String extension="null";
+    private String type="null";
     private byte pic[]="00.00.00".getBytes();
     private ImageView uploadyes,uploadno;
     private String fullname,phoneno,emailid,location,pass;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +84,59 @@ public class DeliveryBoySinup extends AppCompatActivity {
 
         });
 
+    }
+
+    private void uploadimage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), GALLERY_IMAGE);
+
+
+    }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onActivityResult ( int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            //Toast.makeText(this, "you selected="+filePathpic+uri, Toast.LENGTH_SHORT).show();
+
+            try {
+                filePathpic = FileUtils.getPath(this, uri);
+                //imageView.setImageDrawable(Drawable.createFromPath(filePathpic));
+                type = FileUtils.getMimeType(this, uri);
+                extension = (String) FileUtils.getExtension(String.valueOf(uri));
+                Toast.makeText(this, "extension=>"+extension, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "extension=>"+type, Toast.LENGTH_SHORT).show();
+
+
+                try {
+                    // Toast.makeText(this, ""+filePathpic, Toast.LENGTH_SHORT).show();
+                    ContentResolver cr = getBaseContext().getContentResolver();
+                    InputStream inputStream = cr.openInputStream(uri);
+                    Bitmap bitmap = BitmapFactory.decodeFile(filePathpic);
+                    //  imageView.setImageBitmap(bitmap);
+                    uploadno.setVisibility(View.GONE);
+                    uploadyes.setVisibility(View.VISIBLE);
+                     Toast.makeText(this, ""+bitmap, Toast.LENGTH_SHORT).show();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                    pic = baos.toByteArray();
+                    Toast.makeText(this, "pic=>"+pic, Toast.LENGTH_SHORT).show();
+                    uploadno.setVisibility(View.GONE);
+                    uploadyes.setVisibility(View.VISIBLE);
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                //  Toast.makeText(this, ""+e, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void register(){
@@ -122,7 +171,7 @@ public class DeliveryBoySinup extends AppCompatActivity {
     }
 
     private void registerprocess() {
-
+        Toast.makeText(this, ""+extension+type+pic, Toast.LENGTH_SHORT).show();
         final ProgressDialog progressDialog = new ProgressDialog(this);
         // progressDialog.setIcon(R.drawable.headwaygmslogo);
         progressDialog.setTitle("Register.....");
@@ -134,7 +183,7 @@ public class DeliveryBoySinup extends AppCompatActivity {
             public void onResponse(NetworkResponse response) {
                 String resultResponse = new String(response.data);
                 try {
-                    JSONObject result = new JSONObject(resultResponse);
+                    //JSONObject result = new JSONObject(resultResponse);
                     // Toast.makeText(Registeration_Activity.this, ""+result, Toast.LENGTH_SHORT).show();
                     JSONObject obj = new JSONObject(resultResponse);
                     String status = obj.getString("status");
@@ -225,8 +274,7 @@ public class DeliveryBoySinup extends AppCompatActivity {
             @Override
             protected Map<String, DataPart> getByteData() {
                 Map<String, VolleyMultipartRequest.DataPart> params = new HashMap<>();
-                params.put("aadhar_card", new DataPart("pan_doc" + extension, pic, type));
-
+                params.put("aadhar_card", new DataPart("addhar" + extension, pic, type));
                 return params;
 
 
@@ -257,54 +305,5 @@ public class DeliveryBoySinup extends AppCompatActivity {
 
     }
 
-    private void uploadimage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_PICK);
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), GALLERY_IMAGE);
 
-
-    }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    protected void onActivityResult ( int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri uri = data.getData();
-            //Toast.makeText(this, "you selected="+filePathpic+uri, Toast.LENGTH_SHORT).show();
-
-            try {
-                filePathpic = FileUtils.getPath(this, uri);
-                //imageView.setImageDrawable(Drawable.createFromPath(filePathpic));
-                type = FileUtils.getMimeType(this, uri);
-                extension = (String) FileUtils.getExtension(String.valueOf(uri));
-
-
-                try {
-                    // Toast.makeText(this, ""+filePathpic, Toast.LENGTH_SHORT).show();
-                    ContentResolver cr = getBaseContext().getContentResolver();
-                    InputStream inputStream = cr.openInputStream(uri);
-                    Bitmap bitmap = BitmapFactory.decodeFile(filePathpic);
-                  //  imageView.setImageBitmap(bitmap);
-                    uploadno.setVisibility(View.GONE);
-                    uploadyes.setVisibility(View.VISIBLE);
-                    // Toast.makeText(this, ""+bitmap, Toast.LENGTH_SHORT).show();
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                    pic = baos.toByteArray();
-                   // changeimage();
-                    uploadno.setVisibility(View.GONE);
-                    uploadyes.setVisibility(View.VISIBLE);
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                //  Toast.makeText(this, ""+e, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }

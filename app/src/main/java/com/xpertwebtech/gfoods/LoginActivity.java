@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
-                User user=new User("null","null","null","null","null");
+                User user=new User("null","null","null","null","null","null");
                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
 
             }
@@ -125,10 +125,10 @@ public class LoginActivity extends AppCompatActivity {
                                 String username = userJson.getString("name");
                                 String useremail = userJson.getString("email");
                                 String userphone = userJson.getString("phone");
-
                                 String city = userJson.getString("city");
+                                String myrefercode = userJson.getString("own_refer_code");
 
-                                User user=new User(userid,username,userphone,useremail,city);
+                                User user=new User(userid,username,userphone,useremail,city,myrefercode);
 
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 Toast.makeText(LoginActivity.this, "Login Succesfully", Toast.LENGTH_SHORT).show();

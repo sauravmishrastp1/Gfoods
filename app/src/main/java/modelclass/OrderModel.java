@@ -9,6 +9,7 @@ public class OrderModel {
     private String image;
     private String city;
     private String price;
+    private String unitprice;
 
     public String getId() {
         return id;
@@ -74,7 +75,15 @@ public class OrderModel {
         this.price = price;
     }
 
-    public OrderModel(String id, String productid, String date, String quantity, String productname, String image, String city, String price) {
+    public String getUnitprice() {
+        return unitprice;
+    }
+
+    public void setUnitprice(String unitprice) {
+        this.unitprice = unitprice;
+    }
+
+    public OrderModel(String id, String productid, String date, String quantity, String productname, String image, String city, String price, String unitprice) {
         this.id = id;
         this.productid = productid;
         this.date = date;
@@ -83,5 +92,6 @@ public class OrderModel {
         this.image = image;
         this.city = city;
         this.price = price;
+        this.unitprice = unitprice;
     }
 }

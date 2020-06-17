@@ -20,9 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import adapterclass.CityAdapter;
-import adapterclass.StateAdapter;
 import modelclass.CityModel;
-import modelclass.StateName;
 import utils.VolleySingleton;
 
 public class ChooseCityActivity extends AppCompatActivity {

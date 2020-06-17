@@ -29,7 +29,7 @@
         app:compactCalendarOtherMonthDaysTextColor="#070707"
         app:compactCalendarEventIndicatorStyle="fill_large_indicator"
         app:compactCalendarCurrentDayIndicatorStyle="fill_large_indicator"
-        app:compactCalendarCurrentDayBackgroundColor="#C4C2C2"
+        app:compactCalendarCurrentDayBackgroundColor="@color/white"
         app:compactCalendarTextColor="#070707"
         app:compactCalendarBackgroundColor="#FDFDFC"
         app:compactCalendarTextSize="20sp"

@@ -23,7 +23,7 @@ public class AddMoneyLyoutActivity extends AppCompatActivity {
         backpress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddMoneyLyoutActivity.this,MainActivity.class);
+                Intent intent = new Intent(AddMoneyLyoutActivity.this,MyWalletActivity.class);
                 startActivity(intent);
             }
         });

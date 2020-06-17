@@ -17,7 +17,6 @@ import com.xpertwebtech.gfoods.R;
 
 import java.util.ArrayList;
 
-import modelclass.Vactionmodel;
 import modelclass.ViewBillModel;
 
 public class  ViewBillAdapter extends RecyclerView.Adapter<ViewBillAdapter.ViewHolder> {
@@ -50,11 +49,9 @@ public class  ViewBillAdapter extends RecyclerView.Adapter<ViewBillAdapter.ViewH
        holder.qaunt.setText(quant);
         Picasso.get().load(img).into(holder.imageView);
         holder.productname.setText(name);
-        if(quant.equals("0")){
-            holder.layout.setVisibility(View.GONE);
-        }
+
         holder.productquant.setText(quant+"lt");
-        holder.price.setText(price);
+        holder.price.setText("\u20B9"+ price);
 
       holder.itemView.setOnClickListener(new View.OnClickListener() {
           @Override

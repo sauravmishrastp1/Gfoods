@@ -42,6 +42,8 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.ViewHo
         Picasso.get().load(img).into(holder.productimg);
         holder.productname.setText(name);
         holder.productquantity.setText(quant);
+
+
     }
 
     @Override

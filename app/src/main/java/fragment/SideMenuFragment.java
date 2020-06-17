@@ -6,16 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.xpertwebtech.gfoods.AddPlaneActivity;
 import com.xpertwebtech.gfoods.DeliveryBoyActivityLogin;
 import com.xpertwebtech.gfoods.EarnAndRefferActivity;
 import com.xpertwebtech.gfoods.HelpActivity;
@@ -25,15 +19,11 @@ import com.xpertwebtech.gfoods.MonthlyWiseBillActivity;
 import com.xpertwebtech.gfoods.MyProfileActivty;
 import com.xpertwebtech.gfoods.MyWalletActivity;
 import com.xpertwebtech.gfoods.OffersActivity;
+import com.xpertwebtech.gfoods.OrderHitoryActivity;
 import com.xpertwebtech.gfoods.R;
 import com.xpertwebtech.gfoods.ViewBillActivity;
 import com.xpertwebtech.gfoods.ViewVacationActivtiy;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import adapterclass.MyWalletLayout;
 import utils.SharedPrefManager;
 
 
@@ -42,7 +32,7 @@ public class SideMenuFragment extends BaseFragment  {
 
     private  View rootView;
     private View shareearnn,myvalletview,addvacation,profileview,
-            offrerlayout,helpview,addplaneview,viewbilllayout,logout,mycleanderview,logivueww,deleveryboylayout;
+            offrerlayout,helpview,addplaneview,viewbilllayout,logout,mycleanderview,logivueww,deleveryboylayout,orderhistorylayout;
 
 
     @Override
@@ -68,6 +58,7 @@ public class SideMenuFragment extends BaseFragment  {
      deleveryboylayout = rootView.findViewById(R.id.deliveryboy);
      addplaneview = rootView.findViewById(R.id.addplaneview);
      helpview = rootView.findViewById(R.id.helpview);
+     orderhistorylayout=rootView.findViewById(R.id.orderhistory);
      logivueww = rootView.findViewById(R.id.LOGIN);
      viewbilllayout = rootView.findViewById(R.id.viewbill);
      logout = rootView.findViewById(R.id.logoutview);
@@ -81,7 +72,13 @@ public class SideMenuFragment extends BaseFragment  {
          logivueww.setVisibility(View.VISIBLE);
          deleveryboylayout.setVisibility(View.VISIBLE);
      }
-
+        orderhistorylayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), OrderHitoryActivity.class);
+                startActivity(intent);
+            }
+        });
      deleveryboylayout.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {

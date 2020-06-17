@@ -1,7 +1,6 @@
 package fragment;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.widget.NestedScrollView;
-import androidx.lifecycle.LifecycleOwner;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -26,7 +21,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.xpertwebtech.gfoods.MyProfileActivty;
 import com.xpertwebtech.gfoods.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

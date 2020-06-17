@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.xpertwebtech.gfoods.AddPlaneActivity;
-import com.xpertwebtech.gfoods.MainActivity;
 import com.xpertwebtech.gfoods.R;
 
 import java.util.ArrayList;
 
-import modelclass.MyPlanModelClass;
 import modelclass.MyPlanProductCat;
 
 public class MyProductcategory extends RecyclerView.Adapter<MyProductcategory.ViewHolder> {
@@ -53,12 +51,14 @@ public class MyProductcategory extends RecyclerView.Adapter<MyProductcategory.Vi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Toast.makeText(context, "date=>"+myPlanModelClasses.get(position).getDate(), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context, AddPlaneActivity.class);
                 intent.putExtra("name",name);
                 intent.putExtra("qunat","0");
+                intent.putExtra("volume",quant);
                 intent.putExtra("price",mrp);
-                intent.putExtra("startdate","0-0-0");
-                intent.putExtra("enddate","0-0-0");
+                intent.putExtra("startdate",myPlanModelClasses.get(position).getDate());
+                intent.putExtra("enddate","null");
                 intent.putExtra("img",img);
                 intent.putExtra("plantye","null");
                 intent.putExtra("type","addplan");

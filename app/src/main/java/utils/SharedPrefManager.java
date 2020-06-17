@@ -24,6 +24,7 @@ public class SharedPrefManager {
     private static final String KEY_PHONE = "keyphone";
     private static  final  String KEY_EMAL = "keyemail";
     private static  final  String KEY_CITY = "keycity";
+    private static final String KEY_REFERCODE = "refercode";
 
 
 
@@ -51,6 +52,7 @@ public class SharedPrefManager {
         editor.putString(KEY_PHONE, user.getPhone());
         editor.putString(KEY_EMAL,user.getEmail());
         editor.putString(KEY_CITY,user.getCity());
+        editor.putString(KEY_REFERCODE,user.getRefercode());
         editor.commit();
     }
 
@@ -68,7 +70,8 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_USERNAME, null),
                 sharedPreferences.getString(KEY_PHONE, null),
                 sharedPreferences.getString(KEY_EMAL,null),
-                sharedPreferences.getString(KEY_CITY,null));
+                sharedPreferences.getString(KEY_CITY,null),
+                sharedPreferences.getString(KEY_REFERCODE,null));
 
     }
 

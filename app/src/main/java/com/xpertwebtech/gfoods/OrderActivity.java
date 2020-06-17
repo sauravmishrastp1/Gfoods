@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import adapterclass.MyProductcategory;
 import adapterclass.OrderAdapter;
-import modelclass.MyPlanProductCat;
 import modelclass.OrderModel;
 import utils.SharedPrefManager;
 import utils.VolleySingleton;
@@ -34,6 +33,7 @@ public class OrderActivity extends AppCompatActivity {
   private ArrayList<OrderModel>orderModels = new ArrayList<>();
   private ProgressBar progressBar;
   private TextView deliveryboyname;
+  private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class OrderActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.orderrecyclerview);
         progressBar = findViewById(R.id.progressbarr);
         deliveryboyname = findViewById(R.id.name);
+        imageView = findViewById(R.id.logout);
         String name = SharedPrefManager.getInstance(getApplicationContext()).getUser().getName();
         deliveryboyname.setText(name);
         Boolean islogin=SharedPrefManager.getInstance(getApplicationContext()).isLoggedIn();
@@ -51,6 +52,14 @@ public class OrderActivity extends AppCompatActivity {
             finish();
         }
        getcategory();
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPrefManager.getInstance(getApplicationContext()).logout();
+            }
+        });
+
+
     }
 
     private void getcategory(){
@@ -79,8 +88,9 @@ public class OrderActivity extends AppCompatActivity {
                                     String userid = categoryJSONObject.getString("user_id");
                                     String add = categoryJSONObject.getString("city");
                                     String date = categoryJSONObject.getString("date");
+                                    String unit_price = categoryJSONObject.getString("unit_price");
 
-                                    orderModels.add(new OrderModel(id,pid,date,quant,pruductnbame,"http://lsne.in/gfood/upload/"+productimg,add,price));
+                                    orderModels.add(new OrderModel(id,pid,date,quant,pruductnbame,"http://lsne.in/gfood/upload/"+productimg,add,price,unit_price));
 
                                     LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
                                     recyclerView.setLayoutManager(layoutManager);

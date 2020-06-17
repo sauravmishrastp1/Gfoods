@@ -143,6 +143,36 @@
                 android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/textview1"
+            android:text="or"
+            android:fontFamily="@font/amiko"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/inputlayousecond"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@id/textview1"
+            android:id="@+id/inputlayoutrefer"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            app:boxStrokeColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height= "wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/referandearn"
+                android:hint="Enter Referral Code(Optional)"
+                android:textSize="15dp"
+                android:fontFamily="@font/amiko"
+                android:textColorHint="#727070"
+                android:visibility="visible"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:layout_width="match_parent"
             android:text="SINUP"
@@ -152,7 +182,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/sinupup"
             android:textColor="@color/white"
-            android:layout_below="@id/inputlayousecond"
+            android:layout_below="@id/inputlayoutrefer"
             android:layout_height="35dp" />
         <LinearLayout
             android:layout_width="wrap_content"

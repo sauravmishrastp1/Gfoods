@@ -18,6 +18,10 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven {
+            url "https://s3-ap-southeast-1.amazonaws.com/godel-release/godel/"
+        }
         
     }
 }
