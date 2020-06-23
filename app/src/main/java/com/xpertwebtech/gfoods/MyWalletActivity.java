@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +46,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import utils.SharedPrefManager;
 import utils.VolleySingleton;
 
+
 public class MyWalletActivity extends AppCompatActivity implements Instamojo.InstamojoPaymentCallback {
     private RecyclerView recyclerViewl;
     private ArrayList<MyWalletModel>myWalletModels=new ArrayList<>();
@@ -57,16 +59,16 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
     private static final HashMap<Instamojo.Environment, String> env_options = new HashMap<>();
 
     static {
-       //env_options.put(Instamojo.Environment.TEST, "https://test.instamojo.com/api/1.1/");
-      env_options.put(Instamojo.Environment.PRODUCTION, "https://www.instamojo.com/@granofoods06");
+       env_options.put(Instamojo.Environment.TEST, "https://imjo.in/wA7nKr");
+      env_options.put(Instamojo.Environment.PRODUCTION, "https://imjo.in/wA7nKr");
     }
-    private Instamojo.Environment mCurrentEnv = Instamojo.Environment.PRODUCTION;
+    private Instamojo.Environment mCurrentEnv = (Instamojo.Environment.PRODUCTION);
     private boolean mCustomUIFlow = false;
     private String addmoney;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private AlertDialog dialog;
-    private String money;
+    private String money=null;
     private ProgressDialog progressDialog;
 
     @Override
@@ -83,7 +85,15 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
             @Override
             public void onClick(View v) {
                 addmoney = entramount.getText().toString();
-                createOrderOnServer();
+                if (Integer.valueOf(addmoney) >= 6||Integer.valueOf(MainActivity.money)>=6) {
+                    mCurrentEnv = Instamojo.Environment.PRODUCTION;
+                    createOrderOnServer();
+                   // mCurrentEnv = Instamojo.Environment.PRODUCTION;
+                }else {
+                    startdatenull();
+
+
+                }
             }
         });
         Bundle bundle = getIntent().getExtras();
@@ -91,7 +101,7 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
 
         if(bundle != null)
         {
-            String money = bundle.getString("money");
+             money = bundle.getString("money");
             entramount.setText(money);
 
 
@@ -137,63 +147,93 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
         recyclerViewl.setAdapter(gridProductAdapter);
         gridProductAdapter.notifyDataSetChanged();
     }
+    private void startdatenull(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(MyWalletActivity.this);
+        builder1.setMessage("Amount can't less than \u20B9 6" +
+                " !");
+        builder1.setCancelable(true);
 
+        builder1.setNegativeButton(
+                "ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
     private void createOrderOnServer() {
-         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait......");
-        progressDialog.show();
-        GetOrderIDRequest request = new GetOrderIDRequest();
-        request.setEnv(mCurrentEnv.name());
-        request.setBuyerName(SharedPrefManager.getInstance(getApplicationContext()).getUser().getName());
-        request.setBuyerEmail(SharedPrefManager.getInstance(getApplicationContext()).getUser().getEmail());
-        request.setBuyerPhone(SharedPrefManager.getInstance(getApplicationContext()).getUser().getPhone());
-        request.setDescription("no dis");
-        request.setAmount(addmoney);
 
-        Call<GetOrderIDResponse> getOrderIDCall = myBackendService.createOrder(request);
-        getOrderIDCall.enqueue(new retrofit2.Callback<GetOrderIDResponse>() {
-            @Override
-            public void onResponse(Call<GetOrderIDResponse> call, Response<GetOrderIDResponse> response) {
-                if (response.isSuccessful()) {
-                    String orderId = response.body().getOrderID();
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Please wait......");
+            progressDialog.show();
+            GetOrderIDRequest request = new GetOrderIDRequest();
+            request.setEnv(mCurrentEnv.name());
+            request.setBuyerName(SharedPrefManager.getInstance(getApplicationContext()).getUser().getName());
+            request.setBuyerEmail(SharedPrefManager.getInstance(getApplicationContext()).getUser().getEmail());
+            request.setBuyerPhone(SharedPrefManager.getInstance(getApplicationContext()).getUser().getPhone());
+            request.setDescription("no dis");
+            request.setAmount(money);
 
-                    if (!mCustomUIFlow) {
-                        // Initiate the default SDK-provided payment activity
-                        initiateSDKPayment(orderId);
+            Call<GetOrderIDResponse> getOrderIDCall = myBackendService.createOrder(request);
+            getOrderIDCall.enqueue(new retrofit2.Callback<GetOrderIDResponse>() {
+                @Override
+                public void onResponse(Call<GetOrderIDResponse> call, Response<GetOrderIDResponse> response) {
+                    if (response.isSuccessful()) {
+                        String orderId = response.body().getOrderID();
+                         progressDialog.dismiss();
+                        Toast.makeText(MyWalletActivity.this, "hii", Toast.LENGTH_SHORT).show();
+                        if (!mCustomUIFlow) {
+                            // Initiate the default SDK-provided payment activity
+                            initiateSDKPayment(orderId);
+                           // Toast.makeText(MyWalletActivity.this, "hii2", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            // OR initiate a custom UI activity
+                            //initiateCustomPayment(orderId);
+                            progressDialog.dismiss();
+                           // Toast.makeText(MyWalletActivity.this, "hii3", Toast.LENGTH_SHORT).show();
+                        }
 
                     } else {
-                        // OR initiate a custom UI activity
-                        //initiateCustomPayment(orderId);
-                    }
-
-                } else {
-                    // Handle api errors
-                    try {
-                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        Log.d(TAG, "Error in response" + jObjError.toString());
+                        // Handle api errors
                         progressDialog.dismiss();
+                        Toast.makeText(MyWalletActivity.this, "ok ", Toast.LENGTH_SHORT).show();
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            Log.d(TAG, "Error in response" + jObjError.toString());
+                            //Toast.makeText(MyWalletActivity.this, "hii4", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            //Toast.makeText(MyWalletActivity.this, "hii5", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            //progressDialog.dismiss();
+                            Toast.makeText(MyWalletActivity.this, "hii6", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<GetOrderIDResponse> call, Throwable t) {
-                // Handle call failure
-                Log.d(TAG, "Failure");
-                progressDialog.dismiss();
+                @Override
+                public void onFailure(Call<GetOrderIDResponse> call, Throwable t) {
+                    // Handle call failure
+                    Log.d(TAG, "Failure");
+                    progressDialog.dismiss();
 
-            }
-        });
-    }
+                }
+            });
+        }
 
-    private void initiateSDKPayment(String orderID) {
-        Instamojo.getInstance().initiatePayment(this, orderID, this);
-    }
+        private void initiateSDKPayment (String orderID){
+            Instamojo.getInstance().initiatePayment(this, orderID, this);
+        }
 
 //    private void initiateCustomPayment(String orderID) {
 //        Intent intent = new Intent(getBaseContext(), CustomUIActivity.class);
@@ -201,168 +241,182 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
 //        startActivityForResult(intent, Constants.REQUEST_CODE);
 //    }
 
-    private void showToast(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    /**
-     * Will check for the transaction status of a particular Transaction
-     *
-     * @param transactionID Unique identifier of a transaction ID
-     */
-    private void checkPaymentStatus(final String transactionID, final String orderID) {
-        if (transactionID == null && orderID == null) {
-            return;
-        }
-
-        if (dialog != null && !dialog.isShowing()) {
-            dialog.show();
-        }
-
-        showToast("Checking transaction status");
-        Call<GatewayOrderStatus> getOrderStatusCall = myBackendService.orderStatus(mCurrentEnv.name().toLowerCase(),
-                orderID, transactionID);
-        getOrderStatusCall.enqueue(new retrofit2.Callback<GatewayOrderStatus>() {
-            @Override
-            public void onResponse(Call<GatewayOrderStatus> call, final Response<GatewayOrderStatus> response) {
-                if (dialog != null && dialog.isShowing()) {
-                    dialog.dismiss();
+        private void showToast ( final String message){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
                 }
+            });
+        }
 
-                if (response.isSuccessful()) {
-                    GatewayOrderStatus orderStatus = response.body();
-                    if (orderStatus.getStatus().equalsIgnoreCase("successful")) {
-                        showToast("Transaction still pending");
-                        return;
+        /**
+         * Will check for the transaction status of a particular Transaction
+         *
+         * @param transactionID Unique identifier of a transaction ID
+         */
+        private void checkPaymentStatus ( final String transactionID, final String orderID){
+            if (transactionID == null && orderID == null) {
+                return;
+            }
+
+            if (dialog != null && !dialog.isShowing()) {
+                dialog.show();
+            }
+
+            showToast("Checking transaction status");
+            Call<GatewayOrderStatus> getOrderStatusCall = myBackendService.orderStatus(mCurrentEnv.name().toLowerCase(),
+                    orderID, transactionID);
+            getOrderStatusCall.enqueue(new retrofit2.Callback<GatewayOrderStatus>() {
+                @Override
+                public void onResponse(Call<GatewayOrderStatus> call, final Response<GatewayOrderStatus> response) {
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
                     }
 
-                    showToast("Transaction successful for id - " + orderStatus.getPaymentID());
-                    refundTheAmount(transactionID, orderStatus.getAmount());
-                    progressDialog.dismiss();
-
-
-                } else {
-                    showToast("Error occurred while fetching transaction status");
-                    progressDialog.dismiss();
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GatewayOrderStatus> call, Throwable t) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (dialog != null && dialog.isShowing()) {
-                            dialog.dismiss();
-                            progressDialog.dismiss();
-
+                    if (response.isSuccessful()) {
+                        GatewayOrderStatus orderStatus = response.body();
+                        if (orderStatus.getStatus().equalsIgnoreCase("successful")) {
+                            showToast("Transaction still pending");
+                            return;
                         }
-                        showToast("Failed to fetch the transaction status");
 
+                        showToast("Transaction successful for id - " + orderStatus.getPaymentID());
+                        refundTheAmount(transactionID, orderStatus.getAmount());
+                        progressDialog.dismiss();
+
+
+                    } else {
+                        showToast("Error occurred while fetching transaction status");
                         progressDialog.dismiss();
 
                     }
-                });
-            }
-        });
-    }
-
-    /**
-     * Will initiate a refund for a given transaction with given amount
-     *
-     * @param transactionID Unique identifier for the transaction
-     * @param amount        amount to be refunded
-     */
-    private void refundTheAmount(String transactionID, String amount) {
-        if (transactionID == null || amount == null) {
-            return;
-        }
-
-        if (dialog != null && !dialog.isShowing()) {
-            dialog.show();
-        }
-
-        showToast("Initiating a refund for - " + amount);
-        Call<ResponseBody> refundCall = myBackendService.refundAmount(
-                mCurrentEnv.name().toLowerCase(),
-                transactionID, amount);
-        refundCall.enqueue(new retrofit2.Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (dialog != null && dialog.isShowing()) {
-                    dialog.dismiss();
                 }
 
-                if (response.isSuccessful()) {
-                    showToast("Refund initiated successfully");
+                @Override
+                public void onFailure(Call<GatewayOrderStatus> call, Throwable t) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (dialog != null && dialog.isShowing()) {
+                                dialog.dismiss();
+                                progressDialog.dismiss();
 
+                            }
+                            showToast("Failed to fetch the transaction status");
+
+                            progressDialog.dismiss();
+
+                        }
+                    });
+                }
+            });
+        }
+
+        /**
+         * Will initiate a refund for a given transaction with given amount
+         *
+         * @param transactionID Unique identifier for the transaction
+         * @param amount        amount to be refunded
+         */
+        private void refundTheAmount (String transactionID, String amount){
+            if (transactionID == null || amount == null) {
+                return;
+            }
+
+            if (dialog != null && !dialog.isShowing()) {
+                dialog.show();
+            }
+
+            showToast("Initiating a refund for - " + amount);
+            Call<ResponseBody> refundCall = myBackendService.refundAmount(
+                    mCurrentEnv.name().toLowerCase(),
+                    transactionID, amount);
+            refundCall.enqueue(new retrofit2.Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+
+                    if (response.isSuccessful()) {
+                        showToast("Refund initiated successfully");
+
+                    } else {
+                        showToast("Failed to initiate a refund");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                        progressDialog.dismiss();
+
+                    }
+
+                    showToast("Failed to Initiate a refund");
+                }
+            });
+        }
+
+        @Override
+        protected void onActivityResult ( int requestCode, int resultCode, Intent data){
+            super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == Constants.REQUEST_CODE && data != null) {
+                String orderID = data.getStringExtra(Constants.ORDER_ID);
+                String transactionID = data.getStringExtra(Constants.TRANSACTION_ID);
+                String paymentID = data.getStringExtra(Constants.PAYMENT_ID);
+
+                // Check transactionID, orderID, and orderID for null before using them to check the Payment status.
+                if (transactionID != null || paymentID != null) {
+                    checkPaymentStatus(transactionID, orderID);
                 } else {
-                    showToast("Failed to initiate a refund");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (dialog != null && dialog.isShowing()) {
-                    dialog.dismiss();
+                    showToast("Oops!! Payment was cancelled");
                     progressDialog.dismiss();
-
                 }
-
-                showToast("Failed to Initiate a refund");
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Constants.REQUEST_CODE && data != null) {
-            String orderID = data.getStringExtra(Constants.ORDER_ID);
-            String transactionID = data.getStringExtra(Constants.TRANSACTION_ID);
-            String paymentID = data.getStringExtra(Constants.PAYMENT_ID);
-
-            // Check transactionID, orderID, and orderID for null before using them to check the Payment status.
-            if (transactionID != null || paymentID != null) {
-                checkPaymentStatus(transactionID, orderID);
-            } else {
-                showToast("Oops!! Payment was cancelled");
-                progressDialog.dismiss();
             }
         }
-    }
 
 
-    public void onInstamojoPaymentComplete(String orderID, String transactionID, String paymentID, String paymentStatus) {
-        Log.d(TAG, "Payment complete");
+        public void onInstamojoPaymentComplete (String orderID, String transactionID, String
+        paymentID, String paymentStatus){
 
-        onpaymnetcomplete();
-        progressDialog.dismiss();
-        orderplace();
+            Log.d(TAG, "Payment complete");
+            progressDialog.dismiss();
+            onpaymnetcomplete();
 
-    }
-
-    public void onPaymentCancelled() {
-        Log.d(TAG, "Payment cancelled");
-        showToast("Payment cancelled by user");
-    }
+           // Toast.makeText(this, "mney="+money, Toast.LENGTH_SHORT).show();
+            if(MainActivity.money.equals("null")){
+                orderplace();
+            }
 
 
-    public void onInitiatePaymentFailure(String errorMessage) {
-        Log.d(TAG, "Initiate payment failed");
-        showToast("Initiating payment failed. Error: " + errorMessage);
-    }
+        }
+
+
+        public void onPaymentCancelled () {
+            Log.d(TAG, "Payment cancelled");
+            showToast("Payment cancelled by user");
+            progressDialog.dismiss();
+        }
+
+
+        public void onInitiatePaymentFailure (String errorMessage){
+            Log.d(TAG, "Initiate payment failed");
+            showToast("Initiating payment failed. Error: " + errorMessage);
+            progressDialog.dismiss();
+            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+        }
+
 
     private void onpaymnetcomplete()
     {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait......");
+        progressDialog.show();
 
-        String url ="http://lsne.in/gfood/api/user-wallet-update?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+"&money="+addmoney;
+        String url ="http://xpertwebtech.in/gfood/api/user-wallet-update?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+"&money="+addmoney;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new com.android.volley.Response.Listener<String>() {
                     @Override
@@ -374,17 +428,21 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
                             String status = obj.getString("status");
                             JSONArray wallet = obj.getJSONArray("wallet");
                             if (status.equals("200")) {
+                               // Toast.makeText(MyWalletActivity.this, "Update Wallet Sucessfully", Toast.LENGTH_SHORT).show();
                                  entramount.getText().clear();
                                 showwallet();
+                               // progressDialog.dismiss();
                             } else {
 
                                 Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
                                 // progressBar.setVisibility(View.GONE);
+                                progressDialog.dismiss();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(MyWalletActivity.this, "somrthing went wrong"+e.getMessage(), Toast.LENGTH_SHORT).show();
                             // progressBar.setVisibility(View.GONE);
+                             progressDialog.dismiss();
                         }
                     }
                 },
@@ -394,6 +452,7 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(MyWalletActivity.this, "Server Not Responding"+error, Toast.LENGTH_SHORT).show();
                         // progressBar.setVisibility(View.GONE);
+                        progressDialog.dismiss();
                     }
                 }) {
 
@@ -403,7 +462,10 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
     }
 
     private  void showwallet(){
-        String url ="http://lsne.in/gfood/api/view-wallet?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait......");
+        progressDialog.show();
+        String url ="http://xpertwebtech.in/gfood/api/view-wallet?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new com.android.volley.Response.Listener<String>() {
                     @Override
@@ -422,16 +484,19 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
                                     blanceavalb.setText("\u20B9"+money);
 
                                 }
+                                progressDialog.dismiss();
 
                             } else {
 
                                 Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
                                 // progressBar.setVisibility(View.GONE);
+                                progressDialog.dismiss();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(MyWalletActivity.this, "somrthing went wrong"+e.getMessage(), Toast.LENGTH_SHORT).show();
                             // progressBar.setVisibility(View.GONE);
+                            progressDialog.dismiss();
                         }
                     }
                 },
@@ -441,6 +506,7 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(MyWalletActivity.this, "Server Not Responding"+error, Toast.LENGTH_SHORT).show();
                         // progressBar.setVisibility(View.GONE);
+                        progressDialog.dismiss();
                     }
                 }) {
 
@@ -460,7 +526,7 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
             progressDialog.setTitle("Order Place.....");
             progressDialog.setMessage("Please wait......");
             progressDialog.show();
-            String ug = "http://lsne.in/gfood/api/bill-submit";
+            String ug = "http://xpertwebtech.in/gfood/api/bill-submit";
             //  String url ="http://lsne.in/gfood/api/bill-submit?product_id="+id+"&invoice_no=123456&time="+time+"&date="+date+"&price="+String.valueOf(totalprice)+"&order_status=1&user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
             StringRequest stringRequest = new StringRequest(Request.Method.POST, ug,
                     new com.android.volley.Response.Listener<String>() {
@@ -477,7 +543,7 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
                                     Toast.makeText(MyWalletActivity.this, "Order Place Succesfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(MyWalletActivity.this, OrderHitoryActivity .class);
                                     startActivity(intent);
-                                    progressDialog.dismiss();
+                                  //  progressDialog.dismiss();
 
                                 } else {
 
@@ -497,7 +563,10 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(MyWalletActivity.this, "Server Not Responding" + error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MyWalletActivity.this, "Order Place Succesfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(MyWalletActivity.this, OrderHitoryActivity .class);
+                            startActivity(intent);
+                           // Toast.makeText(MyWalletActivity.this, "Server Not Responding" + error, Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
                     }) {
@@ -507,6 +576,9 @@ public class MyWalletActivity extends AppCompatActivity implements Instamojo.Ins
                     params.put("product_id", AddPlaneActivity.pid);
                     params.put("invoice_no", "41543");
                     params.put("order_status", "1");
+                    params.put("credit_use","0");
+                    params.put("wallet_use","0");
+                    params.put("unit_price",String.valueOf(AddPlaneActivity.pricceeeel));
                     params.put("start_date", AddPlaneActivity.sdate);
                     params.put("end_date", AddPlaneActivity.edate);
                     params.put("plan_type", AddPlaneActivity.days);

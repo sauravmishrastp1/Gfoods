@@ -129,7 +129,7 @@ public class EndVavationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
-                String url ="http://lsne.in/gfood/api/delete-vacation?id="+vacationid;
+                String url ="http://xpertwebtech.in/gfood/api/delete-vacation?id="+vacationid;
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {
                             @Override
@@ -257,7 +257,7 @@ public class EndVavationActivity extends AppCompatActivity {
         //Toast.makeText(this, ""+time+date, Toast.LENGTH_SHORT).show();
        //Toast.makeText(this, ""+vacationid, Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/update-vacation?id="+vacationid+"&user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+"&start_date="+stardate+"&end_date="+endtime;
+        String url ="http://xpertwebtech.in/gfood/api/update-vacation?id="+vacationid+"&user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+"&start_date="+stardate+"&end_date="+endtime;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

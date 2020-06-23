@@ -101,7 +101,7 @@ public class BottomSheetFragmentUserLogin extends BottomSheetDialogFragment {
         progressDialog.setMessage("Please wait......");
         progressDialog.show();
 
-        String url = "http://lsne.in/gfood/api/update-profile-details";
+        String url = "http://xpertwebtech.in/gfood/api/update-profile-details";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

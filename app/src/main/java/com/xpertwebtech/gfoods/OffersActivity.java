@@ -53,7 +53,7 @@ public class OffersActivity extends AppCompatActivity {
     private void getoffer(){
 
      progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/offer-product";
+        String url ="http://xpertwebtech.in/gfood/api/offer-product";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -72,7 +72,7 @@ public class OffersActivity extends AppCompatActivity {
                                     String productname = profiledataJSONObject.getString("product_name");
                                     String offerdiscount = profiledataJSONObject.getString("promo_code");
 
-                                    offerModels.add(new OfferModel("http://lsne.in/gfood/upload/"+productimg,offer,productname));
+                                    offerModels.add(new OfferModel("http://xpertwebtech.in/gfood/upload/"+productimg,offer,productname));
 
                                     LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
                                     recyclerView.setLayoutManager(layoutManager);

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xpertwebtech.gfoods">
+          xmlns:tools="http://schemas.android.com/tools" package="com.xpertwebtech.gfoods">
 
+    <uses-permission android:name="android.permission.RECEIVE_SMS" tools:node="remove"/>
+    <uses-permission android:name="android.permission.READ_SMS" tools:node="remove"/>
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/logoo"
@@ -43,12 +49,10 @@
             </intent-filter>
         </activity>
         <activity android:name="com.xpertwebtech.gfoods.MainActivity" />
+        <meta-data android:name="instamojo.orderauth.url"
+            android:value="ur website name/access_token.php"
+            />
     </application>
-    <uses-permission android:name="android.permission.STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>

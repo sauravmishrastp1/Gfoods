@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
     private void loginUser()
     {
         progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/login?email="+userId+"&password="+password;
+        String url ="http://xpertwebtech.in/gfood/api/login?email="+userId+"&password="+password;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

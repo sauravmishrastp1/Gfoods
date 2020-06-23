@@ -56,8 +56,8 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
         addplanybutton = findViewById(R.id.buttonaddplane);
         toolbar = findViewById(R.id.toolbar);
         next = findViewById(R.id.nextmonth);
-        mynullplaylaypout = findViewById(R.id.nullmyplanelayout);
-        progressBar = findViewById(R.id.progressbarr);
+         progressBar = findViewById(R.id.progressbarr);
+         mynullplaylaypout = findViewById(R.id.nullmyplanelayout);
         //imageView = findViewById(R.id.referimg);
         recyclerView = findViewById(R.id.recycelerview);
         toolbar.setTitle("My Subscription Plan");
@@ -116,7 +116,7 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
     private void getvactiondata(){
         vactionmodelss.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/user-order-details?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        String url ="http://xpertwebtech.in/gfood/api/user-order-details?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -170,7 +170,7 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MonthlyWiseBillActivity.this, "Empty"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MonthlyWiseBillActivity.this, "No Subscription Plan yet!", Toast.LENGTH_SHORT).show();
                            // imageView.setVisibility(View.VISIBLE);
                             //text.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
@@ -185,7 +185,7 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MonthlyWiseBillActivity.this, "Server Not Responding"+ error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MonthlyWiseBillActivity.this, "Server Not Responding", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                         mynullplaylaypout.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.GONE);

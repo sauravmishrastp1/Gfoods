@@ -114,7 +114,7 @@ public class DeliverdProductDetails extends AppCompatActivity {
         Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
         vactionmodelss.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/upcoming-delivery-by-date?user_id="+userid+"&date="+date;
+        String url ="http://xpertwebtech.in/gfood/api/upcoming-delivery-by-date?user_id="+userid+"&date="+date;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -136,7 +136,7 @@ public class DeliverdProductDetails extends AppCompatActivity {
                                     String deleverystatus = stateJSONObject.getString("mark_dileverd");
                                     String productname = stateJSONObject.getString("product_name");
                                  if(deleverystatus.equals("1")){
-                                     vactionmodelss.add(new UpcomingModel("http://lsne.in/gfood/upload/"+img,productname,quant));
+                                     vactionmodelss.add(new UpcomingModel("http://xpertwebtech.in/gfood/upload/"+img,productname,quant));
 
                                      LinearLayoutManager gridLayoutManager1 = new LinearLayoutManager(DeliverdProductDetails.this);
 

@@ -61,8 +61,8 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-       private ImageView stateimg;
-       private TextView statename;
+        private ImageView stateimg;
+        private TextView statename;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             stateimg = itemView.findViewById(R.id.stateimg);

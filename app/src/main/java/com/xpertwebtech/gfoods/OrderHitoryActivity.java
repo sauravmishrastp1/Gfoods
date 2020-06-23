@@ -116,7 +116,7 @@ public class OrderHitoryActivity extends AppCompatActivity {
     private void getvactiondata(){
         vactionmodelss.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/user-order-details?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        String url ="http://xpertwebtech.in/gfood/api/user-order-details?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -146,7 +146,7 @@ public class OrderHitoryActivity extends AppCompatActivity {
                                     String productname = stateJSONObject.getString("product_name");
 
                                     if(!quant.equals("0")&&!pricee.equals("0")){
-                                        vactionmodelss.add(new ViewBillModel(invoice,dat1,date2,orderstatus,"http://lsne.in/gfood/upload/"+img,pricee,dailyy,productid,quant,productname,id));
+                                        vactionmodelss.add(new ViewBillModel(invoice,dat1,date2,orderstatus,"http://xpertwebtech.in/gfood/upload/"+img,pricee,dailyy,productid,quant,productname,id));
                                         LinearLayoutManager gridLayoutManager1 = new LinearLayoutManager(OrderHitoryActivity.this);
 
                                         recyclerView.setLayoutManager(gridLayoutManager1);
@@ -170,7 +170,7 @@ public class OrderHitoryActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(OrderHitoryActivity.this, "Empty"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(OrderHitoryActivity.this, "No order Yet!", Toast.LENGTH_SHORT).show();
                             // imageView.setVisibility(View.VISIBLE);
                             //text.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);

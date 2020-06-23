@@ -20,7 +20,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.squareup.picasso.Picasso;
 import com.xpertwebtech.gfoods.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -96,7 +95,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.markdellever.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url ="http://lsne.in/gfood/api/mark-deleverd?date="+datev+"&user_id="+ SharedPrefManager.getInstance(context).getUser().getId()+
+                String url ="http://xpertwebtech.in/gfood/api/mark-deleverd?date="+datev+"&user_id="+ SharedPrefManager.getInstance(context).getUser().getId()+
                 "&product_price="+totalprice+"&qunatity="+qunat+"&product_id="+id;
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {

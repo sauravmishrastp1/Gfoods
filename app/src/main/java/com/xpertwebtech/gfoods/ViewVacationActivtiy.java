@@ -216,7 +216,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
        layout1.setVisibility(View.GONE);
        laou2.setVisibility(View.VISIBLE);
        progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/vacation?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+
+        String url ="http://xpertwebtech.in/gfood/api/vacation?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+
         "&start_date="+date+"&end_date="+time;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -269,7 +269,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
         layout1.setVisibility(View.GONE);
         laou2.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/vacation-data?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        String url ="http://xpertwebtech.in/gfood/api/vacation-data?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -314,7 +314,7 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ViewVacationActivtiy.this, "somrthing went wrong"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(ViewVacationActivtiy.this, "No Vacation Yet!", Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                             layout1.setVisibility(View.GONE);
                             nullvacationlayout.setVisibility(View.VISIBLE);

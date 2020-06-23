@@ -151,7 +151,7 @@ public class MyProfileActivty extends AppCompatActivity {
         progressDialog.setTitle("Update.....");
         progressDialog.setMessage("Please wait......");
         progressDialog.show();
-        String url ="http://lsne.in/gfood/api/upload-profile-image";
+        String url ="http://xpertwebtech.in/gfood/api/upload-profile-image";
         VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
@@ -171,7 +171,7 @@ public class MyProfileActivty extends AppCompatActivity {
 
                              if(uidd==SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()) {
 
-                                 Picasso.get().load("http://lsne.in/gfood/upload/" + Img).into(imageView);
+                                 Picasso.get().load("http://xpertwebtech.in/gfood/upload/" + Img).into(imageView);
                              }
 
 
@@ -290,7 +290,7 @@ public class MyProfileActivty extends AppCompatActivity {
 
     private void getprofiledata()
     {
-      String url ="http://lsne.in/gfood/api/profile-details?id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+      String url ="http://xpertwebtech.in/gfood/api/profile-details?id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

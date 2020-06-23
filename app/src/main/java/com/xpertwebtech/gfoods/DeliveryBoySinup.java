@@ -177,7 +177,7 @@ public class DeliveryBoySinup extends AppCompatActivity {
         progressDialog.setTitle("Register.....");
         progressDialog.setMessage("Please wait......");
         progressDialog.show();
-        String url ="http://lsne.in/gfood/api/register-dilevery-boy";
+        String url ="http://xpertwebtech.in/gfood/api/register-dilevery-boy";
         VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {

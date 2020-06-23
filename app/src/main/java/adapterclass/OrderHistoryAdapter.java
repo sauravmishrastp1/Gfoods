@@ -44,7 +44,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     String status = vactionmodels.get(position).getOrderstatus();
     final String quant = vactionmodels.get(position).getQuant();
     final String name = vactionmodels.get(position).getProductname();
-
+       holder.editicon.setVisibility(View.GONE);
        holder.qunat.setText(quant+"pkt");
         Picasso.get().load(img).into(holder.productimg);
         holder.productname.setText(name);
@@ -87,7 +87,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView productname,price,add,qunat,date;
-        ImageView productimg;
+        ImageView productimg,editicon;
         Button markdellever;
         View view ;
         public ViewHolder(@NonNull View itemView) {
@@ -100,6 +100,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             markdellever = itemView.findViewById(R.id.button);
             date = itemView.findViewById(R.id.dateee);
             view = itemView.findViewById(R.id.view);
+            editicon = itemView.findViewById(R.id.editicon);
 
         }
     }

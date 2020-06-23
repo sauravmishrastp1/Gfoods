@@ -65,7 +65,7 @@ public class OrderActivity extends AppCompatActivity {
     private void getcategory(){
         orderModels.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://lsne.in/gfood/api/order-dilevery-details";
+        String url = "http://xpertwebtech.in/gfood/api/order-dilevery-details";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -90,7 +90,7 @@ public class OrderActivity extends AppCompatActivity {
                                     String date = categoryJSONObject.getString("date");
                                     String unit_price = categoryJSONObject.getString("unit_price");
 
-                                    orderModels.add(new OrderModel(id,pid,date,quant,pruductnbame,"http://lsne.in/gfood/upload/"+productimg,add,price,unit_price));
+                                    orderModels.add(new OrderModel(id,pid,date,quant,pruductnbame,"http://xpertwebtech.in/gfood/upload/"+productimg,add,price,unit_price));
 
                                     LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
                                     recyclerView.setLayoutManager(layoutManager);

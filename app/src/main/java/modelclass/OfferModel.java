@@ -1,9 +1,9 @@
 package modelclass;
 
 public class OfferModel {
-   private String productimg;
-   private String offer;
-   private String productname;
+    private String productimg;
+    private String offer;
+    private String productname;
 
     public String getProductimg() {
         return productimg;

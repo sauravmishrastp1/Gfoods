@@ -149,12 +149,14 @@
             android:text="or"
             android:fontFamily="@font/amiko"
             android:layout_marginTop="4dp"
+            android:visibility="gone"
             android:layout_below="@id/inputlayousecond"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content" />
         <com.google.android.material.textfield.TextInputLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_below="@id/textview1"
             android:id="@+id/inputlayoutrefer"
             android:layout_marginEnd="20dp"
@@ -169,7 +171,7 @@
                 android:textSize="15dp"
                 android:fontFamily="@font/amiko"
                 android:textColorHint="#727070"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>

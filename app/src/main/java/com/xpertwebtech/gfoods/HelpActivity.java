@@ -43,7 +43,7 @@ public class HelpActivity extends AppCompatActivity {
     }
       private void gethelpdata()
       {
-        String url = "http://lsne.in/gfood/api/help-us";
+        String url = "http://xpertwebtech.in/gfood/api/help-us";
           StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                   new Response.Listener<String>() {
                       @Override

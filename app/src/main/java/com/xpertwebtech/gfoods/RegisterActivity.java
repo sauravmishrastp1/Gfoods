@@ -20,8 +20,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import modelclass.User;
@@ -112,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             randomNumber = stringBuilder.toString();
-            Toast.makeText(this, "code=>"+randomNumber, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "code=>"+randomNumber, Toast.LENGTH_SHORT).show();
 
             registerUser(randomNumber,enterreferalcode);
         }
@@ -122,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
     {
 
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://lsne.in/gfood/api/register?name="+name+"&email="+email+"&password="+pass+"&phone="+phone+"&state="+cityname+"&city="+cityname+"&refer_code="+enterreferalcode+"&own_refer_code="+random;
+        String url = "http://xpertwebtech.in/gfood/api/register?name="+name+"&email="+email+"&password="+pass+"&phone="+phone+"&state="+cityname+"&city="+cityname+"&refer_code="+enterreferalcode+"&own_refer_code="+random;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -191,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void onpaymnetcomplete()
     {
-        String url ="http://lsne.in/gfood/api/wallet?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+"&money="+"0";
+        String url ="http://xpertwebtech.in/gfood/api/wallet?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+"&money="+"0";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new com.android.volley.Response.Listener<String>() {
                     @Override

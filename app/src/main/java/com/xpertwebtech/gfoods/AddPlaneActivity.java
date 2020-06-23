@@ -47,7 +47,7 @@ public class AddPlaneActivity extends AppCompatActivity {
     private ImageView productimg;
     private Bundle bundle;
     private String pricee;
-    private int pricceeeel;
+    public static int pricceeeel;
     public static int totalprice;
     private TextView totalpricetxt;
     private RecyclerView weeklyrecyclerView;
@@ -496,12 +496,13 @@ public class AddPlaneActivity extends AppCompatActivity {
           startdatenull();
             //orderplace.setBackgroundResource(R.drawable.disablegradient);
         } else {
+           // Toast.makeText(this, "pid="+pid+"sdate="+sdate+"edate="+edate+"price="+pricceeeel+"count="+count+"totalprice="+totalprice+"days"+days+"userid="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId(), Toast.LENGTH_SHORT).show();
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Order Place.....");
             progressDialog.setMessage("Please wait......");
             progressDialog.show();
-            String ug = "http://lsne.in/gfood/api/bill-submit";
+            String ug = "http://xpertwebtech.in/gfood/api/bill-submit";
             //  String url ="http://lsne.in/gfood/api/bill-submit?product_id="+id+"&invoice_no=123456&time="+time+"&date="+date+"&price="+String.valueOf(totalprice)+"&order_status=1&user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
             StringRequest stringRequest = new StringRequest(Request.Method.POST, ug,
                     new Response.Listener<String>() {
@@ -527,8 +528,9 @@ public class AddPlaneActivity extends AppCompatActivity {
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Intent intent = new Intent(AddPlaneActivity.this, MonthlyWiseBillActivity.class);
-                                startActivity(intent);
+                               // Intent intent = new Intent(AddPlaneActivity.this, MonthlyWiseBillActivity.class);
+                                Toast.makeText(AddPlaneActivity.this, "Server Not Responding" +e.getMessage(), Toast.LENGTH_SHORT).show();
+                               // startActivity(intent);
                                 progressDialog.dismiss();
 
                             }
@@ -538,7 +540,12 @@ public class AddPlaneActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(AddPlaneActivity.this, "Server Not Responding" + error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddPlaneActivity.this, "Order Place Succesfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddPlaneActivity.this, OrderHitoryActivity .class);
+                            startActivity(intent);
+//                            Intent intent = new Intent(AddPlaneActivity.this, OrderHitoryActivity .class);
+//                            startActivity(intent);
+                           // Toast.makeText(AddPlaneActivity.this, "Server Not Responding" + error, Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
                     }) {
@@ -551,11 +558,12 @@ public class AddPlaneActivity extends AppCompatActivity {
                     params.put("start_date", sdate);
                     params.put("end_date", edate);
                     params.put("unit_price",String.valueOf(pricceeeel));
-                   // params.put("credit_use","");
+                    params.put("credit_use","10");
+                    params.put("wallet_use","10");
                     params.put("plan_type", days);
                     params.put("qunatity", String.valueOf(count));
                     params.put("price", String.valueOf(totalprice));
-                    params.put("user_id", SharedPrefManager.getInstance(getApplicationContext()).getUser().getId());
+                    params.put("user_id",SharedPrefManager.getInstance(getApplicationContext()).getUser().getId());
                     return params;
                 }
 
@@ -599,6 +607,7 @@ public class AddPlaneActivity extends AppCompatActivity {
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+
                                 Toast.makeText(AddPlaneActivity.this, "somrthing went wrong" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
 
@@ -609,6 +618,7 @@ public class AddPlaneActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
+
                             Toast.makeText(AddPlaneActivity.this, "Server Not Responding" + error, Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
@@ -619,7 +629,7 @@ public class AddPlaneActivity extends AppCompatActivity {
                     params.put("product_id", pid);
                     params.put("id", id);
                     params.put("invoice_no", "41543");
-                    params.put("order_status", "1");
+                    params.put("order_status","1");
                     params.put("start_date", sdate);
                     params.put("end_date", edate);
                     params.put("plan_type", days);

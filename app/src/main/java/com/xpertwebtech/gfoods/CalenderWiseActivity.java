@@ -112,7 +112,7 @@ public class CalenderWiseActivity extends AppCompatActivity {
         Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
         vactionmodelss.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url ="http://lsne.in/gfood/api/upcoming-delivery-by-date?user_id="+userid+"&date="+date;
+        String url ="http://xpertwebtech.in/gfood/api/upcoming-delivery-by-date?user_id="+userid+"&date="+date;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

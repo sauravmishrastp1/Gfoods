@@ -123,7 +123,7 @@ public class ViewBillActivity extends AppCompatActivity {
         vactionmodels.clear();
         layouttt.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
-        String url2="http://lsne.in/gfood/api/order-by-date?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+"&date="+formattedDatee;
+        String url2="http://xpertwebtech.in/gfood/api/order-by-date?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId()+"&date="+formattedDatee;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url2,
                 new Response.Listener<String>() {
                     @Override

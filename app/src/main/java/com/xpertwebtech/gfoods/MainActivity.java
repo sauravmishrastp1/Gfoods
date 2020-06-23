@@ -44,7 +44,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import adapterclass.MyAdapter;
 import adapterclass.MyPlanAdapter;
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     private String plantypee;
     private Bundle bundle;
     public static  String date1="null";
-    public static String money;
+    public static String money="null";
 
 
     @SuppressLint({"NewApi", "ResourceAsColor"})
@@ -367,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         myPlanProductCats.clear();
-        String url = "http://lsne.in/gfood/api/category";
+        String url = "http://xpertwebtech.in/gfood/api/category";
         progressBar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -429,7 +428,7 @@ public class MainActivity extends AppCompatActivity {
     private void getcategory() {
         myPlanProductCats.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://lsne.in/gfood/api/product?category_id="+catId;
+        String url = "http://xpertwebtech.in/gfood/api/product?category_id="+catId;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -449,7 +448,7 @@ public class MainActivity extends AppCompatActivity {
                                     String price = categoryJSONObject.getString("price");
                                     String id = categoryJSONObject.getString("id");
 
-                                    myPlanProductCats.add(new MyPlanProductCat("http://lsne.in/gfood/upload/" + productimg, pruductnbame, quant, price, color, id,date1));
+                                    myPlanProductCats.add(new MyPlanProductCat("http://xpertwebtech.in/gfood/upload/" + productimg, pruductnbame, quant, price, color, id,date1));
 
                                     LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                                     productcategory.setLayoutManager(layoutManager);
@@ -530,7 +529,7 @@ public class MainActivity extends AppCompatActivity {
        //  Toast.makeText(this, "enter", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
 
-        String url = "http://lsne.in/gfood/api/upcoming-product-for-dileverd?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        String url = "http://xpertwebtech.in/gfood/api/upcoming-product-for-dileverd?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -607,7 +606,7 @@ public class MainActivity extends AppCompatActivity {
        // Toast.makeText(this, "enter", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
 
-        String url = "http://lsne.in/gfood/api/dileverd-product?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        String url = "http://xpertwebtech.in/gfood/api/dileverd-product?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -679,7 +678,7 @@ public class MainActivity extends AppCompatActivity {
     private void vacationevent(){
         // Toast.makeText(this, "enter", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://lsne.in/gfood/api/vacation-data?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        String url = "http://xpertwebtech.in/gfood/api/vacation-data?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -832,7 +831,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private  void showwallet(){
-        String url ="http://lsne.in/gfood/api/view-wallet?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        String url ="http://xpertwebtech.in/gfood/api/view-wallet?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new com.android.volley.Response.Listener<String>() {
                     @Override

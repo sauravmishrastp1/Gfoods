@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.xpertwebtech.gfoods.R;
-
 import utils.SharedPrefManager;
 
 public class SplaashScreen extends AppCompatActivity {

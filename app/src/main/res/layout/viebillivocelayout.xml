@@ -49,6 +49,7 @@
                 <TextView
             android:layout_width="wrap_content"
             android:text="4 Packet"
+            android:layout_margin="1dp"
                     android:id="@+id/status"
             android:fontFamily="@font/amiko"
             android:layout_height="wrap_content" />
