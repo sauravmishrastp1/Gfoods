@@ -37,7 +37,7 @@ import modelclass.Vactionmodel;
 import utils.SharedPrefManager;
 import utils.VolleySingleton;
 
-public class  ViewVacationActivtiy extends AppCompatActivity {
+public class   ViewVacationActivtiy extends AppCompatActivity {
     private RelativeLayout backpress;
     private LinearLayout startlayout,endlayout;
     private TextView start,endp;
@@ -105,10 +105,15 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
         addvactionre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layout1.setVisibility(View.VISIBLE);
-                addvactionre.setVisibility(View.GONE);
-                laou2.setVisibility(View.GONE);
-                nullvacationlayout.setVisibility(View.GONE);
+                String userid = SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+                if(userid.equals("null")){
+                    notlogin();
+                }else {
+                    layout1.setVisibility(View.VISIBLE);
+                    addvactionre.setVisibility(View.GONE);
+                    laou2.setVisibility(View.GONE);
+                    nullvacationlayout.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -210,6 +215,24 @@ public class  ViewVacationActivtiy extends AppCompatActivity {
 
 
 
+    }
+    private void notlogin() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(ViewVacationActivtiy.this);
+        builder1.setMessage("You need to login !!");
+        builder1.setCancelable(true);
+
+        builder1.setNegativeButton(
+                "ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
     private void getvacation(){
         //Toast.makeText(this, ""+time+date, Toast.LENGTH_SHORT).show();

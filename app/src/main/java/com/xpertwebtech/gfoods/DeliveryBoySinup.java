@@ -1,10 +1,12 @@
 package com.xpertwebtech.gfoods;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,17 +28,29 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofitfileupload.Api;
 import utils.FileUtils;
+import utils.MultiPartHelperClass;
 import utils.VolleyMultipartRequest;
 import utils.VolleySingleton;
 
@@ -108,8 +122,8 @@ public class DeliveryBoySinup extends AppCompatActivity {
                 //imageView.setImageDrawable(Drawable.createFromPath(filePathpic));
                 type = FileUtils.getMimeType(this, uri);
                 extension = (String) FileUtils.getExtension(String.valueOf(uri));
-                Toast.makeText(this, "extension=>"+extension, Toast.LENGTH_SHORT).show();
-                Toast.makeText(this, "extension=>"+type, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "extension=>"+extension, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "extension=>"+type, Toast.LENGTH_SHORT).show();
 
 
                 try {
@@ -120,11 +134,11 @@ public class DeliveryBoySinup extends AppCompatActivity {
                     //  imageView.setImageBitmap(bitmap);
                     uploadno.setVisibility(View.GONE);
                     uploadyes.setVisibility(View.VISIBLE);
-                     Toast.makeText(this, ""+bitmap, Toast.LENGTH_SHORT).show();
+                     //Toast.makeText(this, ""+bitmap, Toast.LENGTH_SHORT).show();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                     pic = baos.toByteArray();
-                    Toast.makeText(this, "pic=>"+pic, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "pic=>"+pic, Toast.LENGTH_SHORT).show();
                     uploadno.setVisibility(View.GONE);
                     uploadyes.setVisibility(View.VISIBLE);
 
@@ -166,7 +180,7 @@ public class DeliveryBoySinup extends AppCompatActivity {
             phonenoEt.setFocusable(true);
         }
         else {
-            registerprocess();
+            validate();
         }
     }
 
@@ -305,5 +319,84 @@ public class DeliveryBoySinup extends AppCompatActivity {
 
     }
 
+    private void validate() {
 
+        // Toast.makeText(this, "" +account_type, Toast.LENGTH_SHORT).show();
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        // progressDialog.setIcon(R.drawable.headwaygmslogo);
+        progressDialog.setTitle("Submit.....");
+        progressDialog.setMessage("Please wait......");
+        progressDialog.show();
+
+
+        File file = new File(filePathpic);
+      //  File file1 = new File(filePatadhar);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), filePathpic);
+        MultipartBody.Part parts = MultipartBody.Part.createFormData("newimage", file.getName(), requestBody);
+       // MultipartBody.Part parts2 = MultipartBody.Part.createFormData("newimage", file1.getName(), requestBody);
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+
+        //creating retrofit object
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        //creating our api
+        Api api = retrofit.create(Api.class);
+
+
+        //  RequestBody someData = RequestBody.create(MediaType.parse("text/plain"), "This is a new Image");
+
+        Api uploadApis = retrofit.create(Api.class);
+        Call call = uploadApis.becomevendor(MultiPartHelperClass.getMultipartData(new File(filePathpic),"aadhar_card"),fullname,emailid,pass,phoneno,location);
+        call.enqueue(new Callback<Response>() {
+            @Override
+            public void onResponse(retrofit2.Call<Response> call, retrofit2.Response<Response> response) {
+                try {
+                    assert response.body() != null;
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(DeliveryBoySinup.this);
+                    builder1.setMessage("Thanku! Your Details is Submit");
+                    builder1.setCancelable(true);
+                    builder1.setIcon(R.drawable.logo);
+
+                    builder1.setPositiveButton(
+                            "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent intent = new Intent(DeliveryBoySinup.this, MainActivity.class);
+                                    startActivity(intent);
+
+                                }
+                            });
+
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                    progressDialog.dismiss();
+                 progressDialog.dismiss();
+
+
+                } catch (Exception e) {
+                    progressDialog.dismiss();
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
+    }
 }
+
+
+
+

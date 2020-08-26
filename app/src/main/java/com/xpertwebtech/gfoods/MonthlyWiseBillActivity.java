@@ -40,7 +40,7 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
     private TextView datetxt;
     String date;
     private RelativeLayout backpress;
-    private ArrayList<ViewBillModel> vactionmodelss = new ArrayList<>();
+    public static ArrayList<ViewBillModel> vactionmodelss = new ArrayList<>();
     private TextView text;
     private ImageView imageView;
     private RecyclerView recyclerView;
@@ -146,7 +146,7 @@ public class MonthlyWiseBillActivity extends AppCompatActivity {
                                     String productname = stateJSONObject.getString("product_name");
 
                                    if(!quant.equals("0")&&!pricee.equals("0")){
-                                       vactionmodelss.add(new ViewBillModel(invoice,dat1,date2,orderstatus,"http://lsne.in/gfood/upload/"+img,pricee,dailyy,productid,quant,productname,id));
+                                       vactionmodelss.add(new ViewBillModel(invoice,dat1,date2,orderstatus,"http://xpertwebtech.in/gfood/upload/"+img,pricee,dailyy,productid,quant,productname,id));
                                        LinearLayoutManager gridLayoutManager1 = new LinearLayoutManager(MonthlyWiseBillActivity.this);
 
                                        recyclerView.setLayoutManager(gridLayoutManager1);

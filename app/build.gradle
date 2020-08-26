@@ -7,7 +7,7 @@ android {
         applicationId "com.xpertwebtech.gfoods"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 10
+        versionCode 17
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,13 +22,10 @@ android {
         maven { url "https://jitpack.io" }
         maven { url "http://jzaccone.github.io/SlidingMenu-aar" }
         jcenter()  // <-- should already be there
-        maven {url "https://s3-ap-southeast-1.amazonaws.com/godel-release/godel/"}
-
+        maven { url "https://s3-ap-southeast-1.amazonaws.com/godel-release/godel/" }
 
 
     }
-
-
 
 
 }
@@ -60,4 +57,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //
+    implementation 'com.paykun.sdk:paykun-checkout-lib:1.1.13'
 }

@@ -24,10 +24,13 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import adapterclass.WeekDaysAdapter;
@@ -58,8 +61,11 @@ public class AddPlaneActivity extends AppCompatActivity {
     public static String days = "null";
     public static String quanttt = "0", plantype = "null", type, volume;
     private ImageView dalychcekbox, altercheckbox, selectcheckbox;
-    private int addmoney;
-    private int money;
+    private int addmoney=0;
+    private int money=0;
+    private String name;
+    private  String formattedDatee;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +92,10 @@ public class AddPlaneActivity extends AppCompatActivity {
         price = findViewById(R.id.mrp);
         weeklyrecyclerView = findViewById(R.id.wekdaysrecyclerview);
         quant = findViewById(R.id.productquantity);
+        final Calendar c = Calendar.getInstance();
+
+        //System.out.println("Current time => " + c.getTime());
+
 
         bundle = getIntent().getExtras();
         try {
@@ -96,7 +106,7 @@ public class AddPlaneActivity extends AppCompatActivity {
                 sdate = bundle.getString("startdate");
                 edate = bundle.getString("enddate");
                 volume = bundle.getString("volume");
-                String name = bundle.getString("name");
+                 name = bundle.getString("name");
                 pricee = bundle.getString("price");
                 pid = bundle.getString("pid");
                 id = bundle.getString("id");
@@ -125,7 +135,10 @@ public class AddPlaneActivity extends AppCompatActivity {
                     orderplace.setText("Order Place");
                     days = plantype;
                     if(sdate.equals("null")){
-                        startdatetxt.setText("select date");
+                        Calendar calendar = Calendar.getInstance();
+                        String currentdate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+                       // Toast.makeText(this, ""+currentdate, Toast.LENGTH_SHORT).show();
+                        startdatetxt.setText(currentdate);
                         enddatetxt.setText("optinal");
                     }else {
                         startdatetxt.setText(sdate);
@@ -242,7 +255,7 @@ public class AddPlaneActivity extends AppCompatActivity {
                                 sdate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                                 startdatetxt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
-
+                               // startdatetxt.setText(day + "-" + month + "-" + year2);
                                 startdatetxt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                                 // Toast.makeText(PaymentDeatilsFormActivity.this, "date="+date, LENGTH_SHORT).show();
@@ -280,11 +293,24 @@ public class AddPlaneActivity extends AppCompatActivity {
                                                                       int monthOfYear, int dayOfMonth) {
 
                                                     String enddate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                                                    SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd");
+                                                    SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-mm-dd");
                                                     try {
                                                         if (dfDate.parse(sdate).before(dfDate.parse(enddate))) {
                                                             edate = enddate;
-                                                            enddatetxt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                                            Date dt1 = null;
+                                                            try {
+                                                                dt1 = dfDate.parse(edate);
+                                                            } catch (ParseException e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                            DateFormat format2 = new SimpleDateFormat("mm");
+                                                            DateFormat format = new SimpleDateFormat("yyyy");
+                                                            DateFormat format3 = new SimpleDateFormat("dd");
+                                                            int month = Integer.parseInt(format2.format(dt1));
+                                                            int year2 = Integer.parseInt(format.format(dt1));
+                                                            int day = Integer.parseInt(format3.format(dt1));
+
+                                                            enddatetxt.setText(day + "-" + month + "-" + year2);
                                                         } else if (dfDate.parse(sdate).equals(dfDate.parse(enddate))) {
                                                             Toast.makeText(AddPlaneActivity.this, "start date and end date must not be equal", Toast.LENGTH_SHORT).show();
                                                         } else {
@@ -344,6 +370,20 @@ public class AddPlaneActivity extends AppCompatActivity {
                                                     try {
                                                         if (dfDate.parse(sdate).before(dfDate.parse(enddate))) {
                                                             edate = enddate;
+                                                            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-mm-dd");
+                                                            Date dt1 = null;
+                                                            try {
+                                                                dt1 = format1.parse(edate);
+                                                            } catch (ParseException e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                            DateFormat month = new SimpleDateFormat("EEEE");
+                                                            DateFormat day = new SimpleDateFormat("dd");
+                                                            DateFormat year1 = new SimpleDateFormat("yyyy");
+
+                                                            String monthfinal= month.format(dt1);
+                                                            String dayfinal = day.format(dt1);
+                                                            String finalDay = year1.format(dt1);
                                                             enddatetxt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                                                         } else if (dfDate.parse(sdate).equals(dfDate.parse(enddate))) {
                                                             Toast.makeText(AddPlaneActivity.this, "start date and end date must not be equal", Toast.LENGTH_SHORT).show();
@@ -432,33 +472,39 @@ public class AddPlaneActivity extends AppCompatActivity {
             orderplace.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String useri = SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+                    if(useri.equals("null")){
+                        notlogin();
+                    }else {
 
-                     if(MainActivity.money.equals("0")){
-                         if(count==0){
-                             missaddquant();
-                             // orderplace.setBackgroundResource(R.drawable.disablegradient);
-                         }
-                         if (days.equals("null")) {
-                             plannull();
-                             //orderplace.setBackgroundResource(R.drawable.disablegradient);
-                         } else if (sdate.equals("null")) {
-                             startdatenull();
-                             //orderplace.setBackgroundResource(R.drawable.disablegradient);
-                         } else {
-                             Intent intent = new Intent(AddPlaneActivity.this, MyWalletActivity.class);
-                             intent.putExtra("money",String.valueOf(totalprice));
-                             startActivity(intent);
-                         }
-                     }else {
-                         if (quanttt.equals("0")) {
-                             orderplace();
-                             orderplace.setText("Order Place");
-                         } else {
-                             updatenow();
-                             orderplace.setText("Update");
+                        if (MainActivity.money.equals("0")) {
+                            if (count == 0) {
+                                missaddquant();
+                                // orderplace.setBackgroundResource(R.drawable.disablegradient);
+                            }
+                            if (days.equals("null")) {
+                                plannull();
+                                //orderplace.setBackgroundResource(R.drawable.disablegradient);
+                            } else if (sdate.equals("null")) {
+                                startdatenull();
+                                //orderplace.setBackgroundResource(R.drawable.disablegradient);
+                            } else {
+                                Intent intent = new Intent(AddPlaneActivity.this, MyWalletActivity.class);
+                                intent.putExtra("money", String.valueOf(totalprice));
+                                intent.putExtra("productnmae", name);
+                                startActivity(intent);
+                            }
+                        } else {
+                            if (quanttt.equals("0")) {
+                                orderplace();
+                                orderplace.setText("Order Place");
+                            } else {
+                                updatenow();
+                                orderplace.setText("Update");
 
-                         }
-                     }
+                            }
+                        }
+                    }
 
                 }
               });
@@ -483,7 +529,27 @@ public class AddPlaneActivity extends AppCompatActivity {
         gridProductAdapter.notifyDataSetChanged();
          money = Integer.valueOf(MainActivity.money)-totalprice;
     }
+    private void notlogin() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(AddPlaneActivity.this);
+        builder1.setMessage("You need to login !!");
+        builder1.setCancelable(true);
+
+        builder1.setNegativeButton(
+                "ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
     private void orderplace() {
+        final String invioce = String.valueOf(System.currentTimeMillis());
+        Toast.makeText(this, "inv->"+invioce, Toast.LENGTH_SHORT).show();
 
        if(count==0){
           missaddquant();
@@ -553,7 +619,7 @@ public class AddPlaneActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("product_id", pid);
-                    params.put("invoice_no", "41543");
+                    params.put("invoice_no", invioce);
                     params.put("order_status", "1");
                     params.put("start_date", sdate);
                     params.put("end_date", edate);
@@ -576,13 +642,14 @@ public class AddPlaneActivity extends AppCompatActivity {
     private void updatenow()
 
     {
-
+        final String invioce = String.valueOf(System.currentTimeMillis());
+        //Toast.makeText(this, "qt"+invioce, Toast.LENGTH_SHORT).show();
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Update.....");
             progressDialog.setMessage("Please wait......");
             progressDialog.show();
-            String ug = "http://lsne.in/gfood/api/update-user-order-details";
+            String ug = "http://xpertwebtech.in/gfood/api/update-user-order-details";
             //  String url ="http://lsne.in/gfood/api/bill-submit?product_id="+id+"&invoice_no=123456&time="+time+"&date="+date+"&price="+String.valueOf(totalprice)+"&order_status=1&user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
             StringRequest stringRequest = new StringRequest(Request.Method.POST, ug,
                     new Response.Listener<String>() {
@@ -628,7 +695,7 @@ public class AddPlaneActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
                     params.put("product_id", pid);
                     params.put("id", id);
-                    params.put("invoice_no", "41543");
+                    params.put("invoice_no",invioce);
                     params.put("order_status","1");
                     params.put("start_date", sdate);
                     params.put("end_date", edate);

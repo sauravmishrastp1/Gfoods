@@ -109,7 +109,7 @@ public class CalenderWiseActivity extends AppCompatActivity {
     }
 
     private void getvactiondata(){
-        Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "date=>"+date, Toast.LENGTH_SHORT).show();
         vactionmodelss.clear();
         progressBar.setVisibility(View.VISIBLE);
         String url ="http://xpertwebtech.in/gfood/api/upcoming-delivery-by-date?user_id="+userid+"&date="+date;

@@ -43,9 +43,11 @@ public class MyProductcategory extends RecyclerView.Adapter<MyProductcategory.Vi
         final String quant = myPlanModelClasses.get(position).getQuanty();
         final String mrp = myPlanModelClasses.get(position).getMrp();
         int color = myPlanModelClasses.get(position).getColor();
+        final String quantity = myPlanModelClasses.get(position).getMainquantity();
         Picasso.get().load(img).into(holder.productimg);
         holder.productname.setText(name);
         holder.productquantity.setText(quant);
+        holder.mainquantity.setText(quantity);
         holder.productprice.setText("\u20B9"+mrp);
         holder.cardView.setBackgroundResource(color);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +56,7 @@ public class MyProductcategory extends RecyclerView.Adapter<MyProductcategory.Vi
                 //Toast.makeText(context, "date=>"+myPlanModelClasses.get(position).getDate(), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context, AddPlaneActivity.class);
                 intent.putExtra("name",name);
-                intent.putExtra("qunat","0");
+                intent.putExtra("qunat",quantity);
                 intent.putExtra("volume",quant);
                 intent.putExtra("price",mrp);
                 intent.putExtra("startdate",myPlanModelClasses.get(position).getDate());
@@ -62,7 +64,7 @@ public class MyProductcategory extends RecyclerView.Adapter<MyProductcategory.Vi
                 intent.putExtra("img",img);
                 intent.putExtra("plantye","null");
                 intent.putExtra("type","addplan");
-                intent.putExtra("id","1");
+                intent.putExtra("id",myPlanModelClasses.get(position).getO_id());
                 intent.putExtra("pid",myPlanModelClasses.get(position).getId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -79,7 +81,7 @@ public class MyProductcategory extends RecyclerView.Adapter<MyProductcategory.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView productimg;
         private CardView cardView;
-        private TextView productname,productquantity,productprice;
+        private TextView productname,productquantity,productprice,mainquantity;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             productimg = itemView.findViewById(R.id.productimg);
@@ -87,6 +89,7 @@ public class MyProductcategory extends RecyclerView.Adapter<MyProductcategory.Vi
             productname = itemView.findViewById(R.id.productname);
             productquantity = itemView.findViewById(R.id.productquantity);
             productprice = itemView.findViewById(R.id.mrp);
+            mainquantity = itemView.findViewById(R.id.count);
 
         }
     }

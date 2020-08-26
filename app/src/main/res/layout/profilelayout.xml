@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:text="username"
             android:id="@+id/username"
+            android:drawablePadding="9dp"
             android:textAlignment="textStart"
              android:fontFamily="@font/amiko"
             android:layout_margin="5dp"
@@ -44,6 +45,7 @@
             android:id="@+id/phoneNo"
             android:layout_margin="5dp"
             android:textAlignment="textStart"
+            android:drawablePadding="9dp"
             android:fontFamily="@font/amiko"
             android:drawableStart="@drawable/phoneuser"
             android:layout_height="wrap_content" />
@@ -61,6 +63,7 @@
             android:layout_margin="5dp"
             android:id="@+id/emailet"
             android:textAlignment="textStart"
+            android:drawablePadding="9dp"
             android:fontFamily="@font/amiko"
             android:drawableStart="@drawable/emailuser"
             android:layout_height="wrap_content" />
@@ -79,6 +82,7 @@
             android:textAlignment="textStart"
             android:layout_margin="5dp"
             android:fontFamily="@font/amiko"
+            android:drawablePadding="9dp"
             android:id="@+id/locationet"
             android:drawableStart="@drawable/location"
             android:layout_height="wrap_content" />

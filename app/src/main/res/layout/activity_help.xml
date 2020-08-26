@@ -80,46 +80,13 @@
             android:layout_marginStart="50dp"
             android:layout_height="40dp" />
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:id="@+id/getstart"
-        android:layout_marginTop="15dp"
-        android:layout_margin="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/clidlayout"
-        android:layout_height="wrap_content">
-        <View
-            android:layout_width="match_parent"
-            android:background="#CACACA"
-            android:id="@+id/view1"
-            android:layout_toLeftOf="@id/textview"
-            android:layout_centerVertical="true"
-            android:layout_height="1dp"></View>
-       <TextView
-           android:layout_width="wrap_content"
-           android:text="Getting Started"
-           android:id="@+id/textview"
-           android:textSize="16dp"
-           android:layout_centerInParent="true"
-           android:textColor="#000"
-           android:textStyle="bold"
-           android:fontFamily="@font/amiko"
-          android:layout_marginStart="10dp"
-           android:layout_marginEnd="10dp"
-           android:layout_height="wrap_content" />
-        <View
-            android:layout_width="match_parent"
-            android:background="#CACACA"
-            android:id="@+id/viewr2"
-            android:layout_toRightOf="@id/textview"
-            android:layout_centerVertical="true"
-            android:layout_height="1dp"></View>
-    </RelativeLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:id="@+id/discription"
         android:layout_margin="15dp"
-        android:layout_below="@id/getstart"
+        android:layout_below="@id/clidlayout"
+        android:visibility="gone"
         android:textSize="12dp"
         android:fontFamily="@font/amiko"
         android:layout_centerHorizontal="true"
@@ -131,7 +98,7 @@
         android:layout_marginTop="15dp"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/discription"
+        android:layout_below="@id/clidlayout"
         android:layout_height="wrap_content">
         <View
             android:layout_width="match_parent"

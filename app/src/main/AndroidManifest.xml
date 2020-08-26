@@ -1,58 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.xpertwebtech.gfoods">
-
-    <uses-permission android:name="android.permission.RECEIVE_SMS" tools:node="remove"/>
-    <uses-permission android:name="android.permission.READ_SMS" tools:node="remove"/>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.xpertwebtech.gfoods">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
     <uses-permission android:name="android.permission.STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logoo"
+        android:icon="@drawable/mainlogo"
         android:label="@string/app_name"
-        android:roundIcon="@id/logo"
+        android:roundIcon="@drawable/logoo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.xpertwebtech.gfoods.OrderHitoryActivity"></activity>
-        <activity android:name="com.xpertwebtech.gfoods.AddPlanActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.DeliverdProductDetails" />
-        <activity android:name="com.xpertwebtech.gfoods.CalenderWiseActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.PravacyPolicyPage" />
-        <activity android:name="com.xpertwebtech.gfoods.OrderActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.DeliveryBoySinup" />
-        <activity android:name="com.xpertwebtech.gfoods.DeliveryBoyActivityLogin" />
-        <activity android:name="com.xpertwebtech.gfoods.EndVavationActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.MonthlyWiseBillActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.AddMoneyLyoutActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.ViewBillActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.SelectPayemnt" />
-        <activity android:name="com.xpertwebtech.gfoods.AddPlaneActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.HelpActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.OffersActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.MyPlanActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.MyProfileActivty" />
-        <activity android:name="com.xpertwebtech.gfoods.MyWalletActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.ViewVacationActivtiy" />
-        <activity android:name="com.xpertwebtech.gfoods.EarnAndRefferActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.RegisterActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.ChooseCityActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.ChooseStateActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.LoginActivity" />
-        <activity android:name="com.xpertwebtech.gfoods.SplaashScreen">
+        <activity android:name=".Splash_Screen_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.xpertwebtech.gfoods.MainActivity" />
-        <meta-data android:name="instamojo.orderauth.url"
-            android:value="ur website name/access_token.php"
-            />
-    </application>
+        <activity android:name=".OrderHitoryActivity" />
+        <activity android:name=".AddPlanActivity" />
+        <activity android:name=".DeliverdProductDetails" />
+        <activity android:name=".CalenderWiseActivity" />
+        <activity android:name=".ContactUs" />
+        <activity android:name=".PravacyPolicyPage" />
+        <activity android:name=".OrderActivity" />
+        <activity android:name=".DeliveryBoySinup" />
+        <activity android:name=".DeliveryBoyActivityLogin" />
+        <activity android:name=".EndVavationActivity" />
+        <activity android:name=".MonthlyWiseBillActivity" />
+        <activity android:name=".AddMoneyLyoutActivity" />
+        <activity android:name=".ViewBillActivity" />
+        <activity android:name=".SelectPayemnt" />
+        <activity android:name=".AddPlaneActivity" />
+        <activity android:name=".HelpActivity" />
+        <activity android:name=".OffersActivity" />
+        <activity android:name=".MyPlanActivity" />
+        <activity android:name=".MyProfileActivty" />
+        <activity android:name=".MyWalletActivity" />
+        <activity android:name=".ViewVacationActivtiy" />
+        <activity android:name=".EarnAndRefferActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".ChooseCityActivity" />
+        <activity android:name=".ChooseStateActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SplaashScreen">
 
+        </activity>
+        <activity android:name=".MainActivity" />
+
+        <meta-data
+            android:name="instamojo.orderauth.url"
+            android:value="ur website name/access_token.php" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="C14D39C4BAEAAC289E9B9F0CAA1CF274" />
+        <receiver android:name="constants.Otp_Reciver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+    </application>
 
 </manifest>

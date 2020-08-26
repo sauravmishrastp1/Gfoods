@@ -60,7 +60,7 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:layout_width="match_parent"
-                    android:text="My Cleander"
+                    android:text="My Calendar"
                     android:id="@+id/mycleandertext"
                     android:fontFamily="@font/amiko"
                     android:layout_gravity="center"
@@ -74,7 +74,7 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:layout_width="match_parent"
-                    android:text="My Plane"
+                    android:text="My Plan"
                     android:textColor="@color/white"
                     android:id="@+id/myplanetext"
 

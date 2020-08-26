@@ -81,11 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
             PhoneEt.setFocusable(true);
 
         }
-        else if (TextUtils.isEmpty(pass)){
-            passwordEt.setError("Required");
-            passwordEt.setFocusable(true);
 
-        }
         else if (TextUtils.isEmpty(cityname)){
             address.setError("Required");
             address.setFocusable(true);
@@ -120,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
     {
 
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://xpertwebtech.in/gfood/api/register?name="+name+"&email="+email+"&password="+pass+"&phone="+phone+"&state="+cityname+"&city="+cityname+"&refer_code="+enterreferalcode+"&own_refer_code="+random;
+        String url = "http://xpertwebtech.in/gfood/api/register?name="+name+"&email="+email+"&password="+"pass"+"&phone="+phone+"&state="+cityname+"&city="+cityname+"&refer_code="+enterreferalcode+"&own_refer_code="+random;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
@@ -168,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this, "Server Not Responding"+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Server  Not Responding"+error, Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                     }
                 }) {

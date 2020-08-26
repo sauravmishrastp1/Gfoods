@@ -1,5 +1,6 @@
 package com.xpertwebtech.gfoods;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -48,7 +49,6 @@ import java.util.Locale;
 import adapterclass.MyAdapter;
 import adapterclass.MyPlanAdapter;
 import adapterclass.MyProductcategory;
-import fragment.SideMenuFragment;
 import modelclass.EventCalender;
 import modelclass.EventModel;
 import modelclass.MyPlanModelClass;
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView productcategory;
     private ArrayList<MyPlanModelClass> myPlanModelClasses = new ArrayList<>();
     private ArrayList<MyPlanProductCat> myPlanProductCats = new ArrayList<>();
+    private ArrayList<MyPlanProductCat> myPlanProductCats2 = new ArrayList<>();
     private SlidingMenu menu;
     private CalendarView calendarView;
     private ImageView sidemenu;
@@ -95,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
     private String plantypee;
     private Bundle bundle;
     public static  String date1="null";
-    public static String money="null";
+    public static String money="0";
+    private String qunatity="0";
 
 
     @SuppressLint({"NewApi", "ResourceAsColor"})
@@ -125,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 //        bookingsListView.setAdapter(adapter);
 
 
-//        compactCalendarView.setUseThreeLetterAbbreviation(false);
+//         compactCalendarView.setUseThreeLetterAbbreviation(false);
 //        compactCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
 //        compactCalendarView.displayOtherMonthDays(false);
 //        //compactCalendarView.setIsRtl(true);
@@ -405,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "somrthing went wrong" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(MainActivity.this, "somrthing went wrong" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -426,9 +428,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getcategory() {
+       //  Toast.makeText(this, "cat->"+catId+"id"+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId(), Toast.LENGTH_SHORT).show();
         myPlanProductCats.clear();
+        myPlanProductCats2.clear();
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://xpertwebtech.in/gfood/api/product?category_id="+catId;
+        String url = "http://xpertwebtech.in/gfood/api/product?category_id="+catId+"&user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -438,26 +442,56 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             String status = obj.getString("status");
+                            String product_type = obj.getString("product_type");
+
                             JSONArray category = obj.getJSONArray("Product");
                             if (status.equals("200")) {
-                                for (int i = 0; i < category.length(); i++) {
-                                    JSONObject categoryJSONObject = category.getJSONObject(i);
-                                    String pruductnbame = categoryJSONObject.getString("product_name");
-                                    String productimg = categoryJSONObject.getString("image");
-                                    String quant = categoryJSONObject.getString("product_volume");
-                                    String price = categoryJSONObject.getString("price");
-                                    String id = categoryJSONObject.getString("id");
+//                                if(product_type.equals("0")) {
+//                                    for (int i = 0; i < category.length(); i++) {
+//                                        JSONObject categoryJSONObject = category.getJSONObject(i);
+//                                        String pruductnbame = categoryJSONObject.getString("product_name");
+//                                        String productimg = categoryJSONObject.getString("image");
+//                                        String quant = categoryJSONObject.getString("product_volume");
+//                                        String price = categoryJSONObject.getString("price");
+//                                        String id = categoryJSONObject.getString("id");
+//
+//
+//                                        myPlanProductCats.add(new MyPlanProductCat("http://xpertwebtech.in/gfood/upload/" + productimg, pruductnbame, quant, price, color, id, date1, qunatity));
+//
+//                                        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//                                        productcategory.setLayoutManager(layoutManager);
+//                                        layoutManager.setOrientation(RecyclerView.VERTICAL);
+//                                        MyProductcategory gridProductAdapter = new MyProductcategory(myPlanProductCats, MainActivity.this);
+//                                        productcategory.setAdapter(gridProductAdapter);
+//                                        gridProductAdapter.notifyDataSetChanged();
+//                                        progressBar.setVisibility(View.GONE);
+//
+//                                    }
+//                                }
 
-                                    myPlanProductCats.add(new MyPlanProductCat("http://xpertwebtech.in/gfood/upload/" + productimg, pruductnbame, quant, price, color, id,date1));
+                                if(product_type.equals("1")) {
+                                    for (int i = 0; i < category.length(); i++) {
+                                        JSONObject categoryJSONObject = category.getJSONObject(i);
+                                        JSONObject jsonObject2 = category.getJSONObject(i);
+                                        String pruductnbame = jsonObject2.getString("product_name");
+                                        //JSONObject jsonObject = categoryJSONObject.getJSONObject("purchase");
+                                        String order_id = categoryJSONObject.getString("order_id");
+                                        String productimg = categoryJSONObject.getString("image");
+                                        //String quant = jsonObject.getString("id");
+                                        String price = categoryJSONObject.getString("price");
+                                        String id = categoryJSONObject.getString("id");
+                                        qunatity = categoryJSONObject.getString("purchase");
 
-                                    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-                                    productcategory.setLayoutManager(layoutManager);
-                                    layoutManager.setOrientation(RecyclerView.VERTICAL);
-                                    MyProductcategory gridProductAdapter = new MyProductcategory(myPlanProductCats, MainActivity.this);
-                                    productcategory.setAdapter(gridProductAdapter);
-                                    gridProductAdapter.notifyDataSetChanged();
-                                    progressBar.setVisibility(View.GONE);
+                                        myPlanProductCats2 .add(new MyPlanProductCat("http://xpertwebtech.in/gfood/upload/" + productimg, pruductnbame, qunatity , price, color, id, date1, qunatity,order_id));
 
+                                        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                                        productcategory.setLayoutManager(layoutManager);
+                                        layoutManager.setOrientation(RecyclerView.VERTICAL);
+                                        MyProductcategory gridProductAdapter = new MyProductcategory(myPlanProductCats2, MainActivity.this);
+                                        productcategory.setAdapter(gridProductAdapter);
+                                        gridProductAdapter.notifyDataSetChanged();
+                                        progressBar.setVisibility(View.GONE);
+                                    }
                                 }
 
                             } else {
@@ -467,7 +501,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "somrthing went wrong" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(MainActivity.this, "somrthing went wrong" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -557,18 +591,22 @@ public class MainActivity extends AppCompatActivity {
                                     DateFormat format2 = new SimpleDateFormat("mm");
                                     DateFormat format = new SimpleDateFormat("yyyy");
                                     DateFormat format3 = new SimpleDateFormat("dd");
+                                    if(dt1!=null){
+                                        int month = Integer.parseInt(format2.format(dt1));
+                                        int year = Integer.parseInt(format.format(dt1));
+                                        int day = Integer.parseInt(format3.format(dt1));
+                                        if(markdevelerd.equals("0")) {
+                                            addEvents(month - 1, year, day - 1);
+                                        }else {
+                                            Toast.makeText(MainActivity.this, "no upcoming", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
 
-                                    int month = Integer.parseInt(format2.format(dt1));
-                                    int year = Integer.parseInt(format.format(dt1));
-                                    int day = Integer.parseInt(format3.format(dt1));
+
                                     //int a [] ={day};
                                    // Toast.makeText(MainActivity.this, "month=>"+month+"year=>"+year+"day=>"+day, Toast.LENGTH_SHORT).show();
 
-                                   if(markdevelerd.equals("0")) {
-                                       addEvents(month - 1, year, day - 1);
-                                   }else {
-                                       Toast.makeText(MainActivity.this, "no upcoming", Toast.LENGTH_SHORT).show();
-                                   }
+
 
                                    // Toast.makeText(MainActivity.this, "day" + day + "month=>" + month + "yer=>" + year, Toast.LENGTH_SHORT).show();
 
@@ -578,7 +616,7 @@ public class MainActivity extends AppCompatActivity {
 
                             } else {
 
-                                Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(), obj.getString("msg"), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
@@ -678,7 +716,7 @@ public class MainActivity extends AppCompatActivity {
     private void vacationevent(){
         // Toast.makeText(this, "enter", Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
-        String url = "http://xpertwebtech.in/gfood/api/vacation-data?user_id="+ SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
+        String url = "http://xpertwebtech.in/gfood/api/vacation-date-by-date?user_id="+SharedPrefManager.getInstance(getApplicationContext()).getUser().getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -688,13 +726,14 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             String status = obj.getString("status");
-                            JSONArray upcoming = obj.getJSONArray("vacation_data");
+                            JSONArray upcoming = obj.getJSONArray("Vacation_date");
                             if (status.equals("200")) {
                                 for (int i = 0; i < upcoming.length(); i++) {
                                     JSONObject categoryJSONObject = upcoming.getJSONObject(i);
-                                    String date = categoryJSONObject.getString("start_date");
+                                    String date = categoryJSONObject.getString("btw_date");
                                     String input_date = date;
-                                    SimpleDateFormat format1 = new SimpleDateFormat("dd-mm-yyyy");
+                                    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-dd-mm");
+                                   //  Toast.makeText(MainActivity.this, "date"+date, Toast.LENGTH_SHORT).show();
                                     Date dt1 = null;
                                     try {
                                         dt1 = format1.parse(input_date);
@@ -725,7 +764,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //Toast.makeText(MainActivity.this, "" , Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, "e+"+e.getMessage() , Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -803,6 +842,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void advacation(int month, int year, int day) {
+       // Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
         currentCalender.setTime(new Date());
         currentCalender.set(Calendar.DAY_OF_MONTH, 1);
         Date firstDayOfMonth = currentCalender.getTime();
@@ -859,7 +899,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "somrthing went wrong"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(MainActivity.this, "somrthing went wrong"+e.getMessage(), Toast.LENGTH_SHORT).show();
                             // progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -877,6 +917,16 @@ public class MainActivity extends AppCompatActivity {
         VolleySingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().clear();
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
+    @Override
+    public void onBackPressed() {
+//       Intent intent = new Intent(MainActivity.this,MainActivity.class);
+//       startActivity(intent);
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
 
-}
+    }
+    }
+
 

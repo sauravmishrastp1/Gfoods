@@ -34,6 +34,8 @@
         android:layout_width="match_parent"
         android:id="@+id/inputlayoufirst"
         android:layout_below="@id/logo"
+        android:maxLength="10"
+        app:counterMaxLength="10"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
@@ -42,19 +44,22 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:drawableStart="@drawable/ic_baseline_local_phone_24"
             android:id="@+id/shipingaddress_et"
-            android:hint="User name"
+            android:hint="Enter Phone"
+            android:drawablePadding="9dp"
             android:textSize="15dp"
             android:fontFamily="@font/amiko"
+            android:maxLength="10"
             android:textColorHint="#727070"
             android:visibility="visible"
-            android:inputType="text"/>
+            android:inputType="number"/>
 
     </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_below="@id/inputlayoufirst"
             android:id="@+id/inputlayousecond"
             android:layout_marginEnd="20dp"
@@ -67,17 +72,17 @@
                 android:layout_width="match_parent"
                 android:id="@+id/passwordet"
                 android:drawableStart="@drawable/ic_lock_black_24dp"
-                android:hint="Password"
+                android:hint="Enter Otp"
+                android:drawablePadding="9dp"
                 android:textSize="15dp"
                 android:fontFamily="@font/amiko"
                 android:textColorHint="#727070"
-                android:visibility="visible"
-                android:inputType="text"/>
+                android:inputType="number"/>
 
         </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:layout_width="match_parent"
-            android:text="LOG IN"
+            android:text="LOGIN"
             android:background="@drawable/gradient2"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -104,6 +109,7 @@
            <TextView
                android:layout_width="wrap_content"
                android:text="Forget Password?"
+               android:visibility="gone"
                android:fontFamily="@font/amiko"
                android:id="@+id/forgetpass"
                android:layout_marginStart="15dp"

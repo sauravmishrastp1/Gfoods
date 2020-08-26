@@ -8,6 +8,8 @@ public class MyPlanProductCat {
     private int color;
     private String id;
     private String date;
+    private String mainquantity;
+    private String o_id;
 
     public String getProductimg() {
         return productimg;
@@ -65,7 +67,23 @@ public class MyPlanProductCat {
         this.date = date;
     }
 
-    public MyPlanProductCat(String productimg, String producvtname, String quanty, String mrp, int color, String id, String date) {
+    public String getMainquantity() {
+        return mainquantity;
+    }
+
+    public void setMainquantity(String mainquantity) {
+        this.mainquantity = mainquantity;
+    }
+
+    public String getO_id() {
+        return o_id;
+    }
+
+    public void setO_id(String o_id) {
+        this.o_id = o_id;
+    }
+
+    public MyPlanProductCat(String productimg, String producvtname, String quanty, String mrp, int color, String id, String date, String mainquantity, String o_id) {
         this.productimg = productimg;
         this.producvtname = producvtname;
         this.quanty = quanty;
@@ -73,5 +91,7 @@ public class MyPlanProductCat {
         this.color = color;
         this.id = id;
         this.date = date;
+        this.mainquantity = mainquantity;
+        this.o_id = o_id;
     }
 }
